@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Components documentation for Next.js Shadcn Dashboard Starter">
-  <title>Components - Dashboard Docs</title>
+  <meta name="description" content="Components documentation for Xandeum pNode Analytics">
+  <title>Components - Xandeum pNode Analytics Docs</title>
   <link rel="stylesheet" href="css/styles.css">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>">
 </head>
 <body>
   <a href="#main-content" class="skip-link">Skip to content</a>
@@ -17,8 +17,8 @@
         <span class="hamburger"></span>
       </button>
       <a href="index.html" class="logo">
-        <span>📚</span>
-        <span>Dashboard Docs</span>
+        <span>📊</span>
+        <span>pNode Analytics Docs</span>
       </a>
       <button class="theme-toggle" aria-label="Toggle theme">
         <svg class="theme-icon theme-icon-moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -60,7 +60,6 @@
         <div class="nav-section-title">Reference</div>
         <ul class="nav-list">
           <li><a href="api-reference.html" class="nav-link">API Reference</a></li>
-          <li><a href="configuration.html" class="nav-link">Configuration</a></li>
         </ul>
       </div>
     </nav>
@@ -75,317 +74,209 @@
 
       <article class="content">
         <h1>Components</h1>
-        <p>This dashboard uses Shadcn UI components built on Radix UI primitives. Here's how to use the key components.</p>
+        <p>Key components used in Xandeum pNode Analytics for displaying node data and network metrics.</p>
 
-        <h2>Button</h2>
-        <p>Buttons trigger actions and come in multiple variants:</p>
+        <h2>Dashboard Components</h2>
 
-        <pre><code class="language-tsx">import { Button } from '@/components/ui/button';
+        <h3>DashboardClient</h3>
+        <p>The main client component that renders the dashboard with pNode data:</p>
 
-// Default button
-&lt;Button&gt;Click me&lt;/Button&gt;
+        <pre><code class="language-tsx">import { DashboardClient } from '@/components/dashboard/DashboardClient';
 
-// Variants
-&lt;Button variant="default"&gt;Default&lt;/Button&gt;
-&lt;Button variant="destructive"&gt;Destructive&lt;/Button&gt;
-&lt;Button variant="outline"&gt;Outline&lt;/Button&gt;
-&lt;Button variant="secondary"&gt;Secondary&lt;/Button&gt;
-&lt;Button variant="ghost"&gt;Ghost&lt;/Button&gt;
-&lt;Button variant="link"&gt;Link&lt;/Button&gt;
+// Used in page.tsx with server-fetched data
+&lt;DashboardClient initialData={data} /&gt;</code></pre>
 
-// Sizes
-&lt;Button size="default"&gt;Default&lt;/Button&gt;
-&lt;Button size="sm"&gt;Small&lt;/Button&gt;
-&lt;Button size="lg"&gt;Large&lt;/Button&gt;
-&lt;Button size="icon"&gt;&lt;Icon /&gt;&lt;/Button&gt;
+        <h3>Stats Cards</h3>
+        <p>Display key network metrics:</p>
 
-// With loading state
-&lt;Button disabled&gt;
-  &lt;Loader2 className="mr-2 h-4 w-4 animate-spin" /&gt;
-  Loading...
-&lt;/Button&gt;</code></pre>
+        <pre><code class="language-tsx">import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
-        <h2>Card</h2>
-        <p>Cards group related content and actions:</p>
+function StatsCard({ title, value, description, icon }) {
+  return (
+    &lt;Card&gt;
+      &lt;CardHeader className="flex flex-row items-center justify-between"&gt;
+        &lt;CardTitle className="text-sm font-medium"&gt;{title}&lt;/CardTitle&gt;
+        {icon}
+      &lt;/CardHeader&gt;
+      &lt;CardContent&gt;
+        &lt;div className="text-2xl font-bold"&gt;{value}&lt;/div&gt;
+        &lt;p className="text-xs text-muted-foreground"&gt;{description}&lt;/p&gt;
+      &lt;/CardContent&gt;
+    &lt;/Card&gt;
+  );
+}
 
-        <pre><code class="language-tsx">import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
-
-&lt;Card&gt;
-  &lt;CardHeader&gt;
-    &lt;CardTitle&gt;Card Title&lt;/CardTitle&gt;
-    &lt;CardDescription&gt;Card description goes here&lt;/CardDescription&gt;
-  &lt;/CardHeader&gt;
-  &lt;CardContent&gt;
-    &lt;p&gt;Card content&lt;/p&gt;
-  &lt;/CardContent&gt;
-  &lt;CardFooter&gt;
-    &lt;Button&gt;Action&lt;/Button&gt;
-  &lt;/CardFooter&gt;
-&lt;/Card&gt;</code></pre>
+// Usage
+&lt;StatsCard
+  title="Total Nodes"
+  value={stats.total}
+  description={`${stats.online} online, ${stats.offline} offline`}
+  icon={&lt;Server className="h-4 w-4" /&gt;}
+/&gt;</code></pre>
 
         <h2>Data Table</h2>
-        <p>Tables display data with sorting, filtering, and pagination:</p>
+        <p>Display pNode data with sorting, filtering, and pagination:</p>
 
         <pre><code class="language-tsx">import { DataTable } from '@/components/ui/data-table';
-import { columns } from './columns';
 
-// Define columns
+// Define columns for pNode data
 const columns = [
   {
-    accessorKey: 'name',
-    header: 'Name',
-  },
-  {
-    accessorKey: 'email',
-    header: 'Email',
+    accessorKey: 'pubkey',
+    header: 'Public Key',
+    cell: ({ row }) =&gt; (
+      &lt;code className="text-xs"&gt;
+        {row.original.pubkey.slice(0, 8)}...
+      &lt;/code&gt;
+    ),
   },
   {
     accessorKey: 'status',
     header: 'Status',
     cell: ({ row }) =&gt; (
-      &lt;Badge variant={row.original.status}&gt;
+      &lt;Badge variant={row.original.status === 'online' ? 'success' : 'destructive'}&gt;
         {row.original.status}
       &lt;/Badge&gt;
     ),
   },
-];
-
-// Use the table
-&lt;DataTable columns={columns} data={users} /&gt;</code></pre>
-
-        <h3>Server-Side Pagination</h3>
-        <p>For large datasets, use server-side pagination with Nuqs:</p>
-
-        <pre><code class="language-tsx">import { useQueryState } from 'nuqs';
-
-function ProductTable() {
-  const [page, setPage] = useQueryState('page', { defaultValue: '1' });
-  const [search, setSearch] = useQueryState('search', { defaultValue: '' });
-  
-  // Fetch data based on query params
-  const { data } = useProducts({ page, search });
-  
-  return (
-    &lt;DataTable
-      columns={columns}
-      data={data.items}
-      pageCount={data.pageCount}
-      onPageChange={setPage}
-    /&gt;
-  );
-}</code></pre>
-
-        <h2>Form</h2>
-        <p>Forms with React Hook Form and Zod validation:</p>
-
-        <pre><code class="language-tsx">import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-
-const formSchema = z.object({
-  username: z.string().min(2).max(50),
-  email: z.string().email(),
-});
-
-function ProfileForm() {
-  const form = useForm({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      username: '',
-      email: '',
-    },
-  });
-
-  function onSubmit(values) {
-    console.log(values);
-  }
-
-  return (
-    &lt;Form {...form}&gt;
-      &lt;form onSubmit={form.handleSubmit(onSubmit)}&gt;
-        &lt;FormField
-          control={form.control}
-          name="username"
-          render={({ field }) =&gt; (
-            &lt;FormItem&gt;
-              &lt;FormLabel&gt;Username&lt;/FormLabel&gt;
-              &lt;FormControl&gt;
-                &lt;Input placeholder="johndoe" {...field} /&gt;
-              &lt;/FormControl&gt;
-              &lt;FormDescription&gt;
-                Your public display name.
-              &lt;/FormDescription&gt;
-              &lt;FormMessage /&gt;
-            &lt;/FormItem&gt;
-          )}
-        /&gt;
-        &lt;Button type="submit"&gt;Submit&lt;/Button&gt;
-      &lt;/form&gt;
-    &lt;/Form&gt;
-  );
-}</code></pre>
-
-        <h2>Dialog</h2>
-        <p>Modal dialogs for confirmations and forms:</p>
-
-        <pre><code class="language-tsx">import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog';
-
-&lt;Dialog&gt;
-  &lt;DialogTrigger asChild&gt;
-    &lt;Button&gt;Open Dialog&lt;/Button&gt;
-  &lt;/DialogTrigger&gt;
-  &lt;DialogContent&gt;
-    &lt;DialogHeader&gt;
-      &lt;DialogTitle&gt;Are you sure?&lt;/DialogTitle&gt;
-      &lt;DialogDescription&gt;
-        This action cannot be undone.
-      &lt;/DialogDescription&gt;
-    &lt;/DialogHeader&gt;
-    &lt;DialogFooter&gt;
-      &lt;Button variant="outline"&gt;Cancel&lt;/Button&gt;
-      &lt;Button&gt;Continue&lt;/Button&gt;
-    &lt;/DialogFooter&gt;
-  &lt;/DialogContent&gt;
-&lt;/Dialog&gt;</code></pre>
-
-        <h2>Dropdown Menu</h2>
-        <p>Contextual menus for actions:</p>
-
-        <pre><code class="language-tsx">import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-
-&lt;DropdownMenu&gt;
-  &lt;DropdownMenuTrigger asChild&gt;
-    &lt;Button variant="ghost"&gt;
-      &lt;MoreHorizontal className="h-4 w-4" /&gt;
-    &lt;/Button&gt;
-  &lt;/DropdownMenuTrigger&gt;
-  &lt;DropdownMenuContent align="end"&gt;
-    &lt;DropdownMenuLabel&gt;Actions&lt;/DropdownMenuLabel&gt;
-    &lt;DropdownMenuSeparator /&gt;
-    &lt;DropdownMenuItem&gt;Edit&lt;/DropdownMenuItem&gt;
-    &lt;DropdownMenuItem&gt;Duplicate&lt;/DropdownMenuItem&gt;
-    &lt;DropdownMenuItem className="text-destructive"&gt;
-      Delete
-    &lt;/DropdownMenuItem&gt;
-  &lt;/DropdownMenuContent&gt;
-&lt;/DropdownMenu&gt;</code></pre>
-
-        <h2>Toast Notifications</h2>
-        <p>Show feedback messages with Sonner:</p>
-
-        <pre><code class="language-tsx">import { toast } from 'sonner';
-
-// Success toast
-toast.success('Changes saved successfully');
-
-// Error toast
-toast.error('Something went wrong');
-
-// With description
-toast('Event created', {
-  description: 'Your event has been scheduled.',
-});
-
-// With action
-toast('File uploaded', {
-  action: {
-    label: 'View',
-    onClick: () =&gt; console.log('View clicked'),
-  },
-});
-
-// Promise toast
-toast.promise(saveData(), {
-  loading: 'Saving...',
-  success: 'Data saved!',
-  error: 'Could not save.',
-});</code></pre>
-
-        <h2>Sidebar Navigation</h2>
-        <p>The dashboard sidebar with collapsible sections:</p>
-
-        <pre><code class="language-tsx">import { Sidebar, SidebarNav, SidebarNavItem } from '@/components/layout/sidebar';
-
-const navItems = [
   {
-    title: 'Dashboard',
-    href: '/dashboard',
-    icon: LayoutDashboard,
+    accessorKey: 'version',
+    header: 'Version',
   },
   {
-    title: 'Products',
-    href: '/dashboard/products',
-    icon: Package,
+    accessorKey: 'storageUsagePercent',
+    header: 'Storage',
+    cell: ({ row }) =&gt; (
+      &lt;Progress value={row.original.storageUsagePercent * 100} /&gt;
+    ),
   },
   {
-    title: 'Settings',
-    icon: Settings,
-    children: [
-      { title: 'Profile', href: '/dashboard/settings/profile' },
-      { title: 'Team', href: '/dashboard/settings/team' },
-    ],
+    accessorKey: 'uptime',
+    header: 'Uptime',
+    cell: ({ row }) =&gt; `${row.original.uptime.toFixed(1)} days`,
   },
 ];
 
-&lt;Sidebar&gt;
-  &lt;SidebarNav items={navItems} /&gt;
-&lt;/Sidebar&gt;</code></pre>
+// Usage
+&lt;DataTable columns={columns} data={nodes} /&gt;</code></pre>
+
+        <h2>Charts</h2>
+        <p>Recharts-powered visualizations:</p>
+
+        <h3>Storage Distribution Chart</h3>
+        <pre><code class="language-tsx">import { PieChart, Pie, Cell, ResponsiveContainer, Legend } from 'recharts';
+
+function StorageChart({ data }) {
+  return (
+    &lt;ResponsiveContainer width="100%" height={300}&gt;
+      &lt;PieChart&gt;
+        &lt;Pie
+          data={data}
+          dataKey="value"
+          nameKey="name"
+          cx="50%"
+          cy="50%"
+          outerRadius={80}
+        &gt;
+          {data.map((entry, index) =&gt; (
+            &lt;Cell key={index} fill={COLORS[index % COLORS.length]} /&gt;
+          ))}
+        &lt;/Pie&gt;
+        &lt;Legend /&gt;
+      &lt;/PieChart&gt;
+    &lt;/ResponsiveContainer&gt;
+  );
+}</code></pre>
+
+        <h3>Version Distribution Chart</h3>
+        <pre><code class="language-tsx">import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
+
+function VersionChart({ versionData }) {
+  return (
+    &lt;ResponsiveContainer width="100%" height={300}&gt;
+      &lt;BarChart data={versionData}&gt;
+        &lt;XAxis dataKey="version" /&gt;
+        &lt;YAxis /&gt;
+        &lt;Tooltip /&gt;
+        &lt;Bar dataKey="count" fill="#3b82f6" /&gt;
+      &lt;/BarChart&gt;
+    &lt;/ResponsiveContainer&gt;
+  );
+}</code></pre>
+
+        <h2>Map Component</h2>
+        <p>Interactive map showing node locations:</p>
+
+        <pre><code class="language-tsx">import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+
+function NodeMap({ nodes }) {
+  return (
+    &lt;MapContainer
+      center={[20, 0]}
+      zoom={2}
+      className="h-[400px] w-full rounded-lg"
+    &gt;
+      &lt;TileLayer
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        attribution='&amp;copy; OpenStreetMap'
+      /&gt;
+      {nodes.map((node) =&gt; (
+        &lt;Marker key={node.pubkey} position={[node.lat, node.lng]}&gt;
+          &lt;Popup&gt;
+            &lt;div&gt;
+              &lt;strong&gt;{node.pubkey.slice(0, 8)}...&lt;/strong&gt;
+              &lt;p&gt;Status: {node.status}&lt;/p&gt;
+              &lt;p&gt;Version: {node.version}&lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/Popup&gt;
+        &lt;/Marker&gt;
+      ))}
+    &lt;/MapContainer&gt;
+  );
+}</code></pre>
+
+        <h2>UI Components</h2>
+        <p>Shadcn UI components used throughout the dashboard:</p>
+
+        <h3>Badge</h3>
+        <pre><code class="language-tsx">import { Badge } from '@/components/ui/badge';
+
+&lt;Badge variant="default"&gt;Online&lt;/Badge&gt;
+&lt;Badge variant="destructive"&gt;Offline&lt;/Badge&gt;
+&lt;Badge variant="outline"&gt;v0.8.0&lt;/Badge&gt;</code></pre>
+
+        <h3>Progress</h3>
+        <pre><code class="language-tsx">import { Progress } from '@/components/ui/progress';
+
+&lt;Progress value={storageUsagePercent * 100} className="w-full" /&gt;</code></pre>
+
+        <h3>Tooltip</h3>
+        <pre><code class="language-tsx">import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
+
+&lt;TooltipProvider&gt;
+  &lt;Tooltip&gt;
+    &lt;TooltipTrigger&gt;{pubkey.slice(0, 8)}...&lt;/TooltipTrigger&gt;
+    &lt;TooltipContent&gt;
+      &lt;p&gt;{pubkey}&lt;/p&gt;
+    &lt;/TooltipContent&gt;
+  &lt;/Tooltip&gt;
+&lt;/TooltipProvider&gt;</code></pre>
 
         <h2>Adding New Components</h2>
-        <p>Add new Shadcn UI components using the CLI:</p>
+        <p>Add Shadcn UI components using the CLI:</p>
 
-        <pre><code class="language-bash"># Add a single component
-npx shadcn@latest add accordion
+        <pre><code class="language-bash"># Add a component
+npx shadcn@latest add [component-name]
 
-# Add multiple components
-npx shadcn@latest add accordion alert avatar
-
-# View all available components
-npx shadcn@latest add</code></pre>
-
-        <div class="callout callout-info">
-          <svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10"></circle>
-            <line x1="12" y1="16" x2="12" y2="12"></line>
-            <line x1="12" y1="8" x2="12.01" y2="8"></line>
-          </svg>
-          <div class="callout-content">
-            <div class="callout-title">Tip</div>
-            <p>Components are added to <code>src/components/ui/</code> and can be customized to match your design system.</p>
-          </div>
-        </div>
+# Examples
+npx shadcn@latest add card
+npx shadcn@latest add table
+npx shadcn@latest add chart</code></pre>
 
         <nav class="page-nav" aria-label="Page navigation">
           <a href="architecture.html" class="prev-link">

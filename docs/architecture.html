@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Architecture overview for Next.js Shadcn Dashboard Starter">
-  <title>Architecture - Dashboard Docs</title>
+  <meta name="description" content="Architecture overview for Xandeum pNode Analytics">
+  <title>Architecture - Xandeum pNode Analytics Docs</title>
   <link rel="stylesheet" href="css/styles.css">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>">
 </head>
 <body>
   <a href="#main-content" class="skip-link">Skip to content</a>
@@ -17,8 +17,8 @@
         <span class="hamburger"></span>
       </button>
       <a href="index.html" class="logo">
-        <span>📚</span>
-        <span>Dashboard Docs</span>
+        <span>📊</span>
+        <span>pNode Analytics Docs</span>
       </a>
       <button class="theme-toggle" aria-label="Toggle theme">
         <svg class="theme-icon theme-icon-moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -60,7 +60,6 @@
         <div class="nav-section-title">Reference</div>
         <ul class="nav-list">
           <li><a href="api-reference.html" class="nav-link">API Reference</a></li>
-          <li><a href="configuration.html" class="nav-link">Configuration</a></li>
         </ul>
       </div>
     </nav>
@@ -75,237 +74,210 @@
 
       <article class="content">
         <h1>Architecture</h1>
-        <p>This project follows a feature-based architecture pattern that promotes scalability, maintainability, and clear separation of concerns.</p>
+        <p>Xandeum pNode Analytics follows a feature-based architecture pattern optimized for monitoring decentralized storage nodes.</p>
 
         <h2>Project Structure</h2>
-        <p>The codebase is organized into logical directories:</p>
-
         <div class="file-tree">
           <ul>
             <li><span class="folder">src/</span>
               <ul>
                 <li><span class="folder">app/</span> <span class="comment"># Next.js App Router</span>
                   <ul>
-                    <li><span class="folder">(auth)/</span> <span class="comment"># Auth route group</span></li>
-                    <li><span class="folder">(dashboard)/</span> <span class="comment"># Dashboard route group</span></li>
+                    <li><span class="folder">dashboard/</span> <span class="comment"># Dashboard pages</span></li>
                     <li><span class="folder">api/</span> <span class="comment"># API routes</span></li>
+                    <li><span class="file">page.tsx</span> <span class="comment"># Main entry point</span></li>
+                    <li><span class="file">layout.tsx</span> <span class="comment"># Root layout</span></li>
                   </ul>
                 </li>
-                <li><span class="folder">components/</span> <span class="comment"># Shared components</span>
+                <li><span class="folder">components/</span>
                   <ul>
                     <li><span class="folder">ui/</span> <span class="comment"># Shadcn UI components</span></li>
+                    <li><span class="folder">dashboard/</span> <span class="comment"># Dashboard components</span></li>
                     <li><span class="folder">layout/</span> <span class="comment"># Layout components</span></li>
                   </ul>
                 </li>
                 <li><span class="folder">features/</span> <span class="comment"># Feature modules</span>
                   <ul>
-                    <li><span class="folder">[feature]/</span>
-                      <ul>
-                        <li><span class="folder">components/</span></li>
-                        <li><span class="folder">actions/</span></li>
-                        <li><span class="folder">schemas/</span></li>
-                        <li><span class="folder">utils/</span></li>
-                      </ul>
-                    </li>
+                    <li><span class="folder">overview/</span></li>
+                    <li><span class="folder">products/</span></li>
+                    <li><span class="folder">kanban/</span></li>
                   </ul>
                 </li>
-                <li><span class="folder">lib/</span> <span class="comment"># Core utilities</span></li>
+                <li><span class="folder">lib/</span> <span class="comment"># Core utilities</span>
+                  <ul>
+                    <li><span class="file">nodeData.ts</span> <span class="comment"># pNode data utilities</span></li>
+                    <li><span class="file">nodeData.server.ts</span> <span class="comment"># Server-side data</span></li>
+                    <li><span class="file">geo.server.ts</span> <span class="comment"># Geographic utilities</span></li>
+                  </ul>
+                </li>
                 <li><span class="folder">hooks/</span> <span class="comment"># Custom React hooks</span></li>
-                <li><span class="folder">stores/</span> <span class="comment"># Zustand stores</span></li>
                 <li><span class="folder">types/</span> <span class="comment"># TypeScript types</span></li>
+                <li><span class="folder">config/</span> <span class="comment"># Configuration</span></li>
               </ul>
             </li>
+            <li><span class="file">pnodes.json</span> <span class="comment"># pNode data source</span></li>
           </ul>
         </div>
 
-        <h2>App Router Structure</h2>
-        <p>The <code>app/</code> directory uses Next.js 16 App Router conventions:</p>
+        <h2>Data Flow</h2>
+        <p>The application follows a server-first data flow pattern:</p>
 
-        <h3>Route Groups</h3>
-        <p>Route groups (folders in parentheses) organize routes without affecting the URL:</p>
-        <ul>
-          <li><code>(auth)</code> - Authentication pages (sign-in, sign-up)</li>
-          <li><code>(dashboard)</code> - Protected dashboard pages</li>
-        </ul>
+        <ol>
+          <li><strong>Data Source</strong> - pNode data stored in <code>pnodes.json</code></li>
+          <li><strong>Server Functions</strong> - <code>nodeData.server.ts</code> processes data</li>
+          <li><strong>Server Components</strong> - Fetch and render data on server</li>
+          <li><strong>Client Components</strong> - Interactive features and real-time updates</li>
+        </ol>
 
-        <pre><code class="language-plaintext">app/
-├── (auth)/
-│   ├── (signin)/
-│   │   └── sign-in/[[...sign-in]]/page.tsx
-│   └── (signup)/
-│       └── sign-up/[[...sign-up]]/page.tsx
-├── (dashboard)/
-│   ├── dashboard/
-│   │   ├── page.tsx
-│   │   ├── layout.tsx
-│   │   ├── product/
-│   │   ├── kanban/
-│   │   └── ...
-│   └── layout.tsx
-└── layout.tsx</code></pre>
+        <pre><code class="language-tsx">// src/app/page.tsx - Main entry point
+import { DashboardClient } from '@/components/dashboard/DashboardClient';
+import { getDashboardData } from '@/lib/nodeData.server';
 
-        <h3>Parallel Routes</h3>
-        <p>The dashboard overview uses parallel routes for independent loading:</p>
-        <pre><code class="language-plaintext">dashboard/
-├── @analytics/
-│   ├── page.tsx
-│   └── loading.tsx
-├── @recent/
-│   ├── page.tsx
-│   └── loading.tsx
-├── layout.tsx
-└── page.tsx</code></pre>
+export default async function Home() {
+  const data = await getDashboardData();
+  return &lt;DashboardClient initialData={data} /&gt;;
+}</code></pre>
 
-        <h2>Feature-Based Organization</h2>
-        <p>Each feature is self-contained with its own components, actions, and utilities:</p>
+        <h2>pNode Data Structure</h2>
+        <p>Each pNode in the network has the following structure:</p>
 
-        <pre><code class="language-plaintext">features/
-├── products/
-│   ├── components/
-│   │   ├── product-table.tsx
-│   │   ├── product-form.tsx
-│   │   └── product-card.tsx
-│   ├── actions/
-│   │   ├── create-product.ts
-│   │   ├── update-product.ts
-│   │   └── delete-product.ts
-│   ├── schemas/
-│   │   └── product-schema.ts
-│   └── utils/
-│       └── format-product.ts
-├── kanban/
-│   ├── components/
-│   ├── stores/
-│   └── types/
-└── ...</code></pre>
+        <pre><code class="language-typescript">interface PNode {
+  pubkey: string;           // Unique node identifier
+  status: 'online' | 'offline';
+  version: string;          // e.g., "0.8.0"
+  storageUsed: number;      // Bytes
+  storageTotal: number;     // Bytes
+  storageCommitted: number; // Bytes
+  storageUsagePercent: number;
+  uptime: number;           // Days
+  ip: string;               // "IP:port"
+  address: string;
+  isPublic: boolean;
+  rpcPort: number;
+  lastSeen: string;         // ISO timestamp
+  lastSeenTimestamp: number;
+  ramUsed?: number;         // Optional
+  ramTotal?: number;        // Optional
+}</code></pre>
 
-        <h3>Benefits</h3>
-        <ul>
-          <li><strong>Encapsulation</strong> - All feature code in one place</li>
-          <li><strong>Scalability</strong> - Easy to add new features</li>
-          <li><strong>Maintainability</strong> - Clear boundaries between features</li>
-          <li><strong>Team Collaboration</strong> - Teams can work on features independently</li>
-        </ul>
+        <h2>Server-Side Data Processing</h2>
+        <p>The <code>nodeData.server.ts</code> module handles data processing:</p>
+
+        <pre><code class="language-typescript">// lib/nodeData.server.ts
+import pnodesData from '../../pnodes.json';
+
+export async function getDashboardData() {
+  const nodes = pnodesData as PNode[];
+  
+  return {
+    nodes,
+    stats: calculateStats(nodes),
+    versionDistribution: getVersionDistribution(nodes),
+    storageMetrics: getStorageMetrics(nodes),
+  };
+}
+
+function calculateStats(nodes: PNode[]) {
+  return {
+    total: nodes.length,
+    online: nodes.filter(n => n.status === 'online').length,
+    offline: nodes.filter(n => n.status === 'offline').length,
+    totalStorage: nodes.reduce((sum, n) => sum + n.storageTotal, 0),
+    usedStorage: nodes.reduce((sum, n) => sum + n.storageUsed, 0),
+  };
+}</code></pre>
+
+        <h2>Geographic Data</h2>
+        <p>The <code>geo.server.ts</code> module handles IP geolocation:</p>
+
+        <pre><code class="language-typescript">// lib/geo.server.ts
+export async function getNodeLocations(nodes: PNode[]) {
+  // Extract IP addresses and resolve to coordinates
+  const locations = await Promise.all(
+    nodes.map(async (node) => {
+      const ip = node.ip.split(':')[0];
+      const coords = await geolocateIP(ip);
+      return { ...node, ...coords };
+    })
+  );
+  return locations;
+}</code></pre>
 
         <h2>Component Architecture</h2>
 
-        <h3>UI Components</h3>
-        <p>Shadcn UI components live in <code>components/ui/</code>:</p>
-        <pre><code class="language-tsx">// components/ui/button.tsx
-import { cva, type VariantProps } from 'class-variance-authority';
+        <h3>Dashboard Client</h3>
+        <p>The main dashboard component receives server data and manages client state:</p>
 
-const buttonVariants = cva(
-  'inline-flex items-center justify-center rounded-md text-sm font-medium',
-  {
-    variants: {
-      variant: {
-        default: 'bg-primary text-primary-foreground hover:bg-primary/90',
-        destructive: 'bg-destructive text-destructive-foreground',
-        outline: 'border border-input bg-background hover:bg-accent',
-      },
-      size: {
-        default: 'h-10 px-4 py-2',
-        sm: 'h-9 rounded-md px-3',
-        lg: 'h-11 rounded-md px-8',
-      },
-    },
-  }
-);
+        <pre><code class="language-tsx">// components/dashboard/DashboardClient.tsx
+'use client';
 
-export function Button({ variant, size, ...props }) {
-  return &lt;button className={buttonVariants({ variant, size })} {...props} /&gt;;
+import { useState } from 'react';
+import { NodeTable } from './NodeTable';
+import { StatsCards } from './StatsCards';
+import { Charts } from './Charts';
+
+export function DashboardClient({ initialData }) {
+  const [filters, setFilters] = useState({});
+  
+  const filteredNodes = applyFilters(initialData.nodes, filters);
+  
+  return (
+    &lt;div className="space-y-6"&gt;
+      &lt;StatsCards stats={initialData.stats} /&gt;
+      &lt;Charts data={initialData} /&gt;
+      &lt;NodeTable nodes={filteredNodes} /&gt;
+    &lt;/div&gt;
+  );
 }</code></pre>
 
-        <h3>Layout Components</h3>
-        <p>Shared layout components in <code>components/layout/</code>:</p>
-        <ul>
-          <li><code>sidebar.tsx</code> - Main navigation sidebar</li>
-          <li><code>header.tsx</code> - Top header with user menu</li>
-          <li><code>breadcrumb.tsx</code> - Page breadcrumb navigation</li>
-          <li><code>page-container.tsx</code> - Content wrapper</li>
-        </ul>
+        <h3>Feature Modules</h3>
+        <p>Each feature is self-contained:</p>
+
+        <pre><code class="language-plaintext">features/
+├── overview/
+│   ├── components/
+│   │   ├── stats-card.tsx
+│   │   └── overview-chart.tsx
+│   └── utils/
+│       └── calculate-stats.ts
+├── products/
+│   ├── components/
+│   ├── actions/
+│   └── schemas/
+└── kanban/
+    ├── components/
+    └── stores/</code></pre>
 
         <h2>State Management</h2>
 
         <h3>Server State</h3>
-        <p>Server state is managed through:</p>
         <ul>
-          <li><strong>Server Components</strong> - Data fetching at the component level</li>
-          <li><strong>Server Actions</strong> - Mutations with form actions</li>
-          <li><strong>Nuqs</strong> - URL search params for filters/pagination</li>
+          <li><strong>Server Components</strong> - Data fetched at request time</li>
+          <li><strong>Nuqs</strong> - URL-based state for filters and pagination</li>
         </ul>
 
         <h3>Client State</h3>
-        <p>Client state uses Zustand for global state:</p>
-        <pre><code class="language-tsx">// stores/kanban-store.ts
-import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+        <ul>
+          <li><strong>Zustand</strong> - Global client state (kanban, preferences)</li>
+          <li><strong>React State</strong> - Local component state</li>
+        </ul>
 
-interface KanbanStore {
-  columns: Column[];
-  tasks: Task[];
-  moveTask: (taskId: string, columnId: string) => void;
-}
+        <pre><code class="language-typescript">// Using Nuqs for URL state
+import { useQueryState } from 'nuqs';
 
-export const useKanbanStore = create&lt;KanbanStore&gt;()(
-  persist(
-    (set) => ({
-      columns: [],
-      tasks: [],
-      moveTask: (taskId, columnId) =>
-        set((state) => ({
-          tasks: state.tasks.map((task) =>
-            task.id === taskId ? { ...task, columnId } : task
-          ),
-        })),
-    }),
-    { name: 'kanban-storage' }
-  )
-);</code></pre>
-
-        <h2>Data Flow</h2>
-        <p>The typical data flow in the application:</p>
-
-        <ol>
-          <li><strong>Route Handler</strong> - Next.js routes the request</li>
-          <li><strong>Layout</strong> - Wraps page with shared UI</li>
-          <li><strong>Page Component</strong> - Server component fetches data</li>
-          <li><strong>Feature Components</strong> - Render with fetched data</li>
-          <li><strong>Server Actions</strong> - Handle mutations</li>
-          <li><strong>Revalidation</strong> - Update UI after mutations</li>
-        </ol>
-
-        <pre><code class="language-tsx">// Example data flow
-// 1. Page fetches data
-async function ProductsPage() {
-  const products = await getProducts();
-  return &lt;ProductTable data={products} /&gt;;
-}
-
-// 2. Server action handles mutation
-async function createProduct(formData: FormData) {
-  'use server';
-  await db.products.create({ ... });
-  revalidatePath('/dashboard/products');
+function NodeFilters() {
+  const [status, setStatus] = useQueryState('status');
+  const [version, setVersion] = useQueryState('version');
+  
+  return (
+    &lt;div&gt;
+      &lt;Select value={status} onValueChange={setStatus}&gt;
+        &lt;SelectItem value="online"&gt;Online&lt;/SelectItem&gt;
+        &lt;SelectItem value="offline"&gt;Offline&lt;/SelectItem&gt;
+      &lt;/Select&gt;
+    &lt;/div&gt;
+  );
 }</code></pre>
-
-        <h2>Authentication Flow</h2>
-        <p>Clerk handles authentication with middleware protection:</p>
-
-        <pre><code class="language-tsx">// middleware.ts
-import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
-
-const isProtectedRoute = createRouteMatcher(['/dashboard(.*)']);
-
-export default clerkMiddleware(async (auth, req) => {
-  if (isProtectedRoute(req)) {
-    await auth.protect();
-  }
-});
-
-export const config = {
-  matcher: ['/((?!.*\\..*|_next).*)', '/', '/(api|trpc)(.*)'],
-};</code></pre>
 
         <nav class="page-nav" aria-label="Page navigation">
           <a href="features.html" class="prev-link">

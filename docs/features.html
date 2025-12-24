@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Features overview for Next.js Shadcn Dashboard Starter">
-  <title>Features - Dashboard Docs</title>
+  <meta name="description" content="Features overview for Xandeum pNode Analytics">
+  <title>Features - Xandeum pNode Analytics Docs</title>
   <link rel="stylesheet" href="css/styles.css">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>">
 </head>
 <body>
   <a href="#main-content" class="skip-link">Skip to content</a>
@@ -17,8 +17,8 @@
         <span class="hamburger"></span>
       </button>
       <a href="index.html" class="logo">
-        <span>📚</span>
-        <span>Dashboard Docs</span>
+        <span>📊</span>
+        <span>pNode Analytics Docs</span>
       </a>
       <button class="theme-toggle" aria-label="Toggle theme">
         <svg class="theme-icon theme-icon-moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -60,7 +60,6 @@
         <div class="nav-section-title">Reference</div>
         <ul class="nav-list">
           <li><a href="api-reference.html" class="nav-link">API Reference</a></li>
-          <li><a href="configuration.html" class="nav-link">Configuration</a></li>
         </ul>
       </div>
     </nav>
@@ -75,174 +74,119 @@
 
       <article class="content">
         <h1>Features</h1>
-        <p>Explore the comprehensive features included in the Next.js Shadcn Dashboard Starter.</p>
+        <p>Explore the comprehensive features of Xandeum pNode Analytics for monitoring the decentralized storage network.</p>
 
-        <h2>Dashboard Layout</h2>
-        <p>The dashboard comes with a pre-built, responsive layout that includes:</p>
+        <h2>Dashboard Overview</h2>
+        <p>The main dashboard provides a real-time overview of the entire pNode network:</p>
         <ul>
-          <li><strong>Collapsible Sidebar</strong> - Navigation with icons and nested menu support</li>
-          <li><strong>Header</strong> - User menu, notifications, and search</li>
-          <li><strong>Content Area</strong> - Flexible main content with proper spacing</li>
-          <li><strong>Mobile Responsive</strong> - Optimized for all screen sizes</li>
+          <li><strong>Network Stats</strong> - Total nodes, online/offline count, total storage capacity</li>
+          <li><strong>Storage Metrics</strong> - Used vs available storage across the network</li>
+          <li><strong>Version Distribution</strong> - Breakdown of node software versions</li>
+          <li><strong>Uptime Statistics</strong> - Average uptime and reliability metrics</li>
         </ul>
 
-        <h2>Analytics Overview</h2>
-        <p>The dashboard overview page features:</p>
+        <h2>pNode Monitoring</h2>
+        <p>Monitor individual pNodes with detailed metrics:</p>
+
+        <h3>Node Status</h3>
         <ul>
-          <li><strong>Stat Cards</strong> - Display key metrics with trend indicators</li>
-          <li><strong>Charts</strong> - Line, bar, and area charts using Recharts</li>
-          <li><strong>Parallel Routes</strong> - Independent loading states for each section</li>
-          <li><strong>Real-time Updates</strong> - Ready for live data integration</li>
+          <li><strong>Online/Offline</strong> - Real-time status based on last heartbeat</li>
+          <li><strong>Public/Private</strong> - Whether the node is publicly accessible</li>
+          <li><strong>Version</strong> - Current software version (e.g., 0.8.0, 0.7.3)</li>
         </ul>
 
-        <pre><code class="language-tsx">// Example: Analytics Card Component
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+        <h3>Storage Metrics</h3>
+        <ul>
+          <li><strong>Storage Used</strong> - Current storage consumption in bytes</li>
+          <li><strong>Storage Total</strong> - Total available capacity</li>
+          <li><strong>Storage Committed</strong> - Committed storage allocation</li>
+          <li><strong>Usage Percentage</strong> - Visual indicator of storage utilization</li>
+        </ul>
 
-export function AnalyticsCard({ title, value, change }) {
-  return (
-    &lt;Card&gt;
-      &lt;CardHeader&gt;
-        &lt;CardTitle&gt;{title}&lt;/CardTitle&gt;
-      &lt;/CardHeader&gt;
-      &lt;CardContent&gt;
-        &lt;div className="text-2xl font-bold"&gt;{value}&lt;/div&gt;
-        &lt;p className="text-muted-foreground"&gt;{change}&lt;/p&gt;
-      &lt;/CardContent&gt;
-    &lt;/Card&gt;
-  );
-}</code></pre>
+        <h3>Network Information</h3>
+        <ul>
+          <li><strong>IP Address</strong> - Node's network address and port</li>
+          <li><strong>RPC Port</strong> - Remote procedure call port (typically 6000)</li>
+          <li><strong>Last Seen</strong> - Timestamp of last heartbeat</li>
+          <li><strong>Uptime</strong> - Days since node started</li>
+        </ul>
+
+        <h2>Geographic Visualization</h2>
+        <p>Interactive maps powered by Leaflet and React Leaflet:</p>
+        <ul>
+          <li><strong>Node Locations</strong> - Visualize pNode distribution globally</li>
+          <li><strong>Clustering</strong> - Automatic clustering for dense regions</li>
+          <li><strong>Popups</strong> - Click nodes to see detailed information</li>
+          <li><strong>Filtering</strong> - Filter map by status, version, or storage</li>
+        </ul>
 
         <h2>Data Tables</h2>
-        <p>Powerful data tables built with Tanstack Table featuring:</p>
+        <p>Powerful data tables built with Tanstack Table:</p>
         <ul>
-          <li><strong>Server-side Pagination</strong> - Efficient handling of large datasets</li>
-          <li><strong>Search & Filter</strong> - Type-safe search params with Nuqs</li>
-          <li><strong>Column Sorting</strong> - Click headers to sort data</li>
-          <li><strong>Row Selection</strong> - Select single or multiple rows</li>
-          <li><strong>Column Visibility</strong> - Toggle columns on/off</li>
+          <li><strong>Sorting</strong> - Click column headers to sort ascending/descending</li>
+          <li><strong>Filtering</strong> - Filter by any column value</li>
+          <li><strong>Pagination</strong> - Navigate through large datasets</li>
+          <li><strong>Column Visibility</strong> - Show/hide columns as needed</li>
+          <li><strong>Export</strong> - Export data to CSV or JSON</li>
         </ul>
 
-        <h2>Authentication</h2>
-        <p>Secure authentication powered by Clerk:</p>
-        <ul>
-          <li><strong>Sign In/Sign Up</strong> - Beautiful, customizable auth pages</li>
-          <li><strong>Social Logins</strong> - Google, GitHub, and more</li>
-          <li><strong>Passwordless</strong> - Email magic links and OTP</li>
-          <li><strong>Enterprise SSO</strong> - SAML and OIDC support</li>
-          <li><strong>User Management</strong> - Profile and security settings</li>
-        </ul>
+        <pre><code class="language-tsx">// Example: Using the data table
+import { DataTable } from '@/components/ui/data-table';
+import { columns } from './columns';
 
-        <pre><code class="language-tsx">// Protecting routes with Clerk
-import { auth } from '@clerk/nextjs/server';
-import { redirect } from 'next/navigation';
-
-export default async function DashboardPage() {
-  const { userId } = await auth();
-  
-  if (!userId) {
-    redirect('/sign-in');
-  }
-  
-  return &lt;Dashboard /&gt;;
-}</code></pre>
-
-        <h2>Multi-tenant Workspaces</h2>
-        <p>Built-in support for organizations and teams:</p>
-        <ul>
-          <li><strong>Create Organizations</strong> - Users can create workspaces</li>
-          <li><strong>Switch Workspaces</strong> - Easy context switching</li>
-          <li><strong>Team Management</strong> - Invite and manage members</li>
-          <li><strong>Role-based Access</strong> - Admin, member, and custom roles</li>
-        </ul>
-
-        <h2>Billing & Subscriptions</h2>
-        <p>Monetization features with Clerk Billing:</p>
-        <ul>
-          <li><strong>Pricing Table</strong> - Display subscription plans</li>
-          <li><strong>Plan Management</strong> - Upgrade, downgrade, cancel</li>
-          <li><strong>Feature Gating</strong> - Restrict features by plan</li>
-          <li><strong>Usage Tracking</strong> - Monitor resource consumption</li>
-        </ul>
-
-        <pre><code class="language-tsx">// Feature gating example
-import { Protect } from '@clerk/nextjs';
-
-export function ProFeature() {
+export function NodeTable({ nodes }) {
   return (
-    &lt;Protect
-      condition={(has) =&gt; has({ plan: 'pro' })}
-      fallback={&lt;UpgradePrompt /&gt;}
-    &gt;
-      &lt;ProContent /&gt;
-    &lt;/Protect&gt;
+    &lt;DataTable
+      columns={columns}
+      data={nodes}
+      searchKey="pubkey"
+      filterableColumns={['status', 'version']}
+    /&gt;
   );
 }</code></pre>
 
-        <h2>RBAC Navigation</h2>
-        <p>Role-based access control for navigation:</p>
+        <h2>Charts & Visualizations</h2>
+        <p>Recharts-powered visualizations for network analytics:</p>
         <ul>
-          <li><strong>Permission-based</strong> - Show/hide menu items based on permissions</li>
-          <li><strong>Role-based</strong> - Different navigation for different roles</li>
-          <li><strong>Organization-aware</strong> - Context-specific navigation</li>
-          <li><strong>Client-side Filtering</strong> - Fast, responsive UI</li>
+          <li><strong>Line Charts</strong> - Track metrics over time</li>
+          <li><strong>Bar Charts</strong> - Compare node statistics</li>
+          <li><strong>Pie Charts</strong> - Version and status distribution</li>
+          <li><strong>Area Charts</strong> - Storage utilization trends</li>
         </ul>
 
-        <h2>Kanban Board</h2>
-        <p>Drag and drop task management:</p>
+        <h2>Search & Filtering</h2>
+        <p>Advanced search capabilities with Nuqs for URL state management:</p>
         <ul>
-          <li><strong>Drag & Drop</strong> - Smooth interactions with dnd-kit</li>
-          <li><strong>Columns</strong> - Customizable workflow stages</li>
-          <li><strong>Persistence</strong> - State saved with Zustand</li>
-          <li><strong>Keyboard Support</strong> - Accessible drag operations</li>
+          <li><strong>Global Search</strong> - Search by pubkey, IP, or any field</li>
+          <li><strong>Status Filter</strong> - Online, offline, or all nodes</li>
+          <li><strong>Version Filter</strong> - Filter by software version</li>
+          <li><strong>Storage Filter</strong> - Filter by storage capacity range</li>
+          <li><strong>URL Persistence</strong> - Filters persist in URL for sharing</li>
         </ul>
-
-        <h2>Forms</h2>
-        <p>Type-safe forms with validation:</p>
-        <ul>
-          <li><strong>React Hook Form</strong> - Performant form handling</li>
-          <li><strong>Zod Validation</strong> - Schema-based validation</li>
-          <li><strong>Shadcn Form Components</strong> - Beautiful form elements</li>
-          <li><strong>Error Handling</strong> - Clear validation messages</li>
-        </ul>
-
-        <pre><code class="language-tsx">// Form with Zod validation
-import { z } from 'zod';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-
-const schema = z.object({
-  name: z.string().min(2, 'Name must be at least 2 characters'),
-  email: z.string().email('Invalid email address'),
-});
-
-export function ContactForm() {
-  const form = useForm({
-    resolver: zodResolver(schema),
-  });
-  
-  return (
-    &lt;Form {...form}&gt;
-      {/* Form fields */}
-    &lt;/Form&gt;
-  );
-}</code></pre>
 
         <h2>Command Palette</h2>
-        <p>Quick navigation with kbar:</p>
+        <p>Quick navigation with kbar (⌘+K):</p>
         <ul>
-          <li><strong>Keyboard Shortcut</strong> - Press <code>⌘+K</code> to open</li>
-          <li><strong>Search</strong> - Find pages, actions, and commands</li>
-          <li><strong>Nested Actions</strong> - Hierarchical command structure</li>
-          <li><strong>Customizable</strong> - Add your own commands</li>
+          <li><strong>Quick Search</strong> - Find nodes instantly</li>
+          <li><strong>Navigation</strong> - Jump to any page</li>
+          <li><strong>Actions</strong> - Trigger common actions</li>
+          <li><strong>Keyboard Shortcuts</strong> - Efficient navigation</li>
         </ul>
 
-        <h2>Error Tracking</h2>
-        <p>Production-ready error monitoring with Sentry:</p>
+        <h2>Dark Mode</h2>
+        <p>Built-in dark theme for comfortable viewing:</p>
         <ul>
-          <li><strong>Automatic Capture</strong> - Errors logged automatically</li>
-          <li><strong>Session Replay</strong> - See what users experienced</li>
-          <li><strong>Performance Monitoring</strong> - Track page load times</li>
-          <li><strong>Release Tracking</strong> - Associate errors with deployments</li>
+          <li><strong>System Preference</strong> - Automatically matches OS setting</li>
+          <li><strong>Manual Toggle</strong> - Switch themes manually</li>
+          <li><strong>Persistence</strong> - Theme preference saved locally</li>
+        </ul>
+
+        <h2>Error Tracking (Optional)</h2>
+        <p>Sentry integration for production monitoring:</p>
+        <ul>
+          <li><strong>Error Capture</strong> - Automatic error logging</li>
+          <li><strong>Session Replay</strong> - Debug user sessions</li>
+          <li><strong>Performance</strong> - Track page load times</li>
         </ul>
 
         <nav class="page-nav" aria-label="Page navigation">

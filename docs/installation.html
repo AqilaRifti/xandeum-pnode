@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Installation guide for Next.js Shadcn Dashboard Starter">
-  <title>Installation - Dashboard Docs</title>
+  <meta name="description" content="Installation guide for Xandeum pNode Analytics">
+  <title>Installation - Xandeum pNode Analytics Docs</title>
   <link rel="stylesheet" href="css/styles.css">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>">
 </head>
 <body>
   <a href="#main-content" class="skip-link">Skip to content</a>
@@ -17,8 +17,8 @@
         <span class="hamburger"></span>
       </button>
       <a href="index.html" class="logo">
-        <span>📚</span>
-        <span>Dashboard Docs</span>
+        <span>📊</span>
+        <span>pNode Analytics Docs</span>
       </a>
       <button class="theme-toggle" aria-label="Toggle theme">
         <svg class="theme-icon theme-icon-moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -60,7 +60,6 @@
         <div class="nav-section-title">Reference</div>
         <ul class="nav-list">
           <li><a href="api-reference.html" class="nav-link">API Reference</a></li>
-          <li><a href="configuration.html" class="nav-link">Configuration</a></li>
         </ul>
       </div>
     </nav>
@@ -75,7 +74,7 @@
 
       <article class="content">
         <h1>Installation</h1>
-        <p>Follow these steps to set up the Next.js Shadcn Dashboard Starter on your local machine.</p>
+        <p>Follow these steps to set up Xandeum pNode Analytics on your local machine.</p>
 
         <h2>Prerequisites</h2>
         <p>Before you begin, ensure you have the following installed:</p>
@@ -86,13 +85,10 @@
         </ul>
 
         <h2>Step 1: Clone the Repository</h2>
-        <p>Clone the repository to your local machine:</p>
-        <pre><code class="language-bash">git clone https://github.com/Kiranism/next-shadcn-dashboard-starter.git
-cd next-shadcn-dashboard-starter</code></pre>
+        <pre><code class="language-bash">git clone https://github.com/AqilaRifti/xandeum-pnode-analytics.git
+cd xandeum-pnode-analytics</code></pre>
 
         <h2>Step 2: Install Dependencies</h2>
-        <p>Install the project dependencies using your preferred package manager:</p>
-
         <pre><code class="language-bash"># Using Bun (recommended)
 bun install
 
@@ -105,46 +101,10 @@ yarn install
 # Using pnpm
 pnpm install</code></pre>
 
-        <h2>Step 3: Environment Setup</h2>
-        <p>Create a <code>.env.local</code> file by copying the example:</p>
-        <pre><code class="language-bash">cp env.example.txt .env.local</code></pre>
+        <h2>Step 3: Start Development Server</h2>
+        <pre><code class="language-bash">bun run dev</code></pre>
 
-        <p>Open <code>.env.local</code> and configure the required environment variables:</p>
-        <pre><code class="language-env"># Clerk Authentication (Required)
-NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_your_key_here
-CLERK_SECRET_KEY=sk_test_your_key_here
-
-# Clerk URLs (Optional - defaults work for most cases)
-NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
-NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
-
-# Sentry Error Tracking (Optional)
-SENTRY_DSN=https://your_sentry_dsn_here</code></pre>
-
-        <div class="callout callout-warning">
-          <svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
-            <line x1="12" y1="9" x2="12" y2="13"></line>
-            <line x1="12" y1="17" x2="12.01" y2="17"></line>
-          </svg>
-          <div class="callout-content">
-            <div class="callout-title">Important</div>
-            <p>You must set up Clerk authentication for the dashboard to work. See the <a href="configuration.html">Configuration</a> page for detailed Clerk setup instructions.</p>
-          </div>
-        </div>
-
-        <h2>Step 4: Start Development Server</h2>
-        <p>Run the development server:</p>
-        <pre><code class="language-bash"># Using Bun
-bun run dev
-
-# Using npm
-npm run dev
-
-# Using yarn
-yarn dev</code></pre>
-
-        <p>Open <a href="http://localhost:3000" target="_blank" rel="noopener">http://localhost:3000</a> in your browser to see the dashboard.</p>
+        <p>Open <a href="http://localhost:3000" target="_blank" rel="noopener">http://localhost:3000</a> to view the dashboard.</p>
 
         <div class="callout callout-success">
           <svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -152,10 +112,18 @@ yarn dev</code></pre>
             <polyline points="22 4 12 14.01 9 11.01"></polyline>
           </svg>
           <div class="callout-content">
-            <div class="callout-title">Success!</div>
-            <p>You should now see the dashboard running locally. Sign in with Clerk to access all features.</p>
+            <div class="callout-title">That's it!</div>
+            <p>The dashboard works out of the box with the included pNode data. No additional configuration is required to get started.</p>
           </div>
         </div>
+
+        <h2>Optional: Environment Setup</h2>
+        <p>For additional features like error tracking, create a <code>.env.local</code> file:</p>
+        <pre><code class="language-bash">cp env.example.txt .env.local</code></pre>
+
+        <p>Configure the optional environment variables:</p>
+        <pre><code class="language-env"># Sentry Error Tracking (Optional)
+NEXT_PUBLIC_SENTRY_DSN=</code></pre>
 
         <h2>Available Scripts</h2>
         <table>
@@ -192,24 +160,11 @@ yarn dev</code></pre>
         <h2>Troubleshooting</h2>
 
         <h3>Port Already in Use</h3>
-        <p>If port 3000 is already in use, you can specify a different port:</p>
         <pre><code class="language-bash">bun run dev -- -p 3001</code></pre>
 
         <h3>Dependency Issues</h3>
-        <p>If you encounter dependency issues, try clearing the cache:</p>
-        <pre><code class="language-bash"># Remove node_modules and lock file
-rm -rf node_modules bun.lock
-
-# Reinstall dependencies
+        <pre><code class="language-bash">rm -rf node_modules bun.lock
 bun install</code></pre>
-
-        <h3>Clerk Authentication Errors</h3>
-        <p>If you see authentication errors:</p>
-        <ul>
-          <li>Verify your Clerk API keys are correct</li>
-          <li>Ensure the keys match your Clerk application environment (development/production)</li>
-          <li>Check that your Clerk application has the correct redirect URLs configured</li>
-        </ul>
 
         <nav class="page-nav" aria-label="Page navigation">
           <a href="index.html" class="prev-link">

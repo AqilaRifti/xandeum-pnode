@@ -1,124 +1,97 @@
-# Xandeum pNode Analytics Dashboard
+<p align="center">
+  <h1 align="center">Xandeum pNode Analytics</h1>
+</p>
 
-A real-time analytics dashboard for monitoring Xandeum pNodes network performance, health scores, and storage metrics.
+<p align="center">
+  Real-time analytics dashboard for monitoring Xandeum pNodes - decentralized storage nodes in the Xandeum network
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Next.js-16-black?style=flat-square&logo=next.js" alt="Next.js" />
+  <img src="https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react" alt="React" />
+  <img src="https://img.shields.io/badge/TypeScript-5.7-3178C6?style=flat-square&logo=typescript" alt="TypeScript" />
+  <img src="https://img.shields.io/badge/Tailwind-4.0-38B2AC?style=flat-square&logo=tailwind-css" alt="Tailwind" />
+  <img src="https://img.shields.io/badge/License-MIT-green?style=flat-square" alt="License" />
+</p>
+
+---
 
 ## Overview
 
-This dashboard provides comprehensive insights into the Xandeum pNode network, including:
-
-- Network-wide statistics and health monitoring
-- Individual node performance tracking with health scores
-- Storage utilization and capacity metrics
-- Version distribution across the network
-- Node ranking and percentile analysis
-- Geographic distribution visualization
-
-## Tech Stack
-
-- **Framework**: Next.js 16 (App Router)
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS v4
-- **UI Components**: Shadcn UI (New York style)
-- **Charts**: Recharts
-- **State Management**: Zustand
-- **Forms**: React Hook Form + Zod
-- **Tables**: TanStack Table
-- **Command Palette**: kbar
+Xandeum pNode Analytics provides real-time insights into the Xandeum decentralized storage network. Track node status, storage capacity, uptime, and network health across all pNodes.
 
 ## Features
 
-- 📊 Real-time network analytics with interactive charts
-- 🏥 Node health scoring system (uptime, storage efficiency, version, public access)
-- 📈 Performance ranking with percentile groupings
-- 🗺️ Geographic node distribution (Leaflet maps)
-- 🔍 Advanced filtering and search capabilities
-- 📋 Data tables with server-side pagination
-- 🎨 Dark mode optimized UI
-- ⌨️ Keyboard shortcuts via Cmd+K
+| Feature | Description |
+|---------|-------------|
+| 📊 **Real-time Monitoring** | Live status updates for all pNodes |
+| 💾 **Storage Analytics** | Track storage usage and capacity |
+| ⏱️ **Uptime Tracking** | Monitor node availability |
+| 🗺️ **Geographic View** | Visualize node locations with Leaflet |
+| 📈 **Charts** | Recharts visualizations for metrics |
+| 🔍 **Filtering** | Search and filter by status, version |
+| 📋 **Data Tables** | Sortable tables with Tanstack Table |
+| 🌙 **Dark Mode** | Built-in dark theme |
 
-## Getting Started
+## Tech Stack
 
-### Prerequisites
+| Category | Technology |
+|----------|------------|
+| Framework | [Next.js 16](https://nextjs.org) |
+| Language | [TypeScript](https://www.typescriptlang.org) |
+| Styling | [Tailwind CSS v4](https://tailwindcss.com) |
+| Components | [Shadcn UI](https://ui.shadcn.com) |
+| Charts | [Recharts](https://recharts.org) |
+| Maps | [Leaflet](https://leafletjs.com) |
+| Tables | [Tanstack Table](https://tanstack.com/table) |
+| State | [Zustand](https://zustand-demo.pmnd.rs) |
 
-- Node.js 18+
-- pnpm or bun
-
-### Installation
+## Quick Start
 
 ```bash
-# Clone the repository
-git clone <repository-url>
-cd xandeum-pnode-analytics
+git clone https://github.com/AqilaRifti/xandeum-pnode.git
+cd xandeum-pnode
 
-# Install dependencies
-pnpm install
-# or
 bun install
-
-# Copy environment variables
-cp env.example.txt .env.local
-
-# Start development server
-pnpm dev
-# or
-bun dev
+bun run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) to view the dashboard.
-
-### Environment Variables
-
-See `env.example.txt` for required configuration:
-
-- **Clerk**: Authentication (supports keyless mode for quick start)
-- **Sentry**: Error tracking and monitoring
 
 ## Project Structure
 
 ```
 src/
 ├── app/                    # Next.js App Router
-│   ├── dashboard/          # Dashboard routes
-│   └── api/                # API endpoints
-├── components/             # Shared UI components
-│   ├── ui/                 # Shadcn UI primitives
-│   ├── layout/             # Layout components
-│   └── dashboard/          # Dashboard-specific components
-├── features/               # Feature modules
-│   ├── overview/           # Analytics overview
-│   ├── kanban/             # Task management
-│   ├── products/           # Product management
-│   └── profile/            # User profile
-├── lib/                    # Utilities
-│   ├── nodeData.ts         # Node data processing
-│   ├── geo.server.ts       # Geographic utilities
-│   └── utils.ts            # General helpers
-├── config/                 # App configuration
-└── types/                  # TypeScript definitions
+│   ├── dashboard/         # Dashboard pages
+│   └── api/               # API routes
+├── components/
+│   ├── ui/                # Shadcn UI components
+│   ├── dashboard/         # Dashboard components
+│   └── layout/            # Layout components
+├── lib/                   # Utilities
+│   ├── nodeData.ts        # pNode data utilities
+│   └── geo.server.ts      # Geographic utilities
+├── hooks/                 # Custom React hooks
+└── types/                 # TypeScript types
 ```
-
-## Node Health Scoring
-
-Each pNode receives a health score (0-100) based on:
-
-| Factor | Weight | Criteria |
-|--------|--------|----------|
-| Uptime | 40 pts | 30 days = full points |
-| Storage Efficiency | 25 pts | committed/total ratio |
-| Version Currency | 20 pts | Latest version = full points |
-| Public Access | 15 pts | Public nodes score higher |
 
 ## Scripts
 
 ```bash
-pnpm dev          # Start development server
-pnpm build        # Build for production
-pnpm start        # Start production server
-pnpm lint         # Run ESLint
-pnpm lint:fix     # Fix linting issues
-pnpm format       # Format with Prettier
+bun run dev        # Start development server
+bun run build      # Build for production
+bun run start      # Start production server
+bun run lint       # Run ESLint
+bun run format     # Format with Prettier
 ```
+
+## Documentation
+
+Full documentation available in the [docs](./docs/index.html) folder.
 
 ## License
 
-MIT
+MIT License - see [LICENSE](./LICENSE) for details.
+
+Copyright (c) 2025 AqilaRifti
