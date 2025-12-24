@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Architecture overview for Next.js Shadcn Dashboard Starter">
+  <title>Architecture - Dashboard Docs</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to content</a>
+
+  <header class="header">
+    <div class="header-content">
+      <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="hamburger"></span>
+      </button>
+      <a href="index.html" class="logo">
+        <span>📚</span>
+        <span>Dashboard Docs</span>
+      </a>
+      <button class="theme-toggle" aria-label="Toggle theme">
+        <svg class="theme-icon theme-icon-moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+        <svg class="theme-icon theme-icon-sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <div class="layout">
+    <nav class="sidebar" aria-label="Main navigation">
+      <div class="nav-section">
+        <div class="nav-section-title">Getting Started</div>
+        <ul class="nav-list">
+          <li><a href="index.html" class="nav-link">Introduction</a></li>
+          <li><a href="installation.html" class="nav-link">Installation</a></li>
+        </ul>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Guide</div>
+        <ul class="nav-list">
+          <li><a href="features.html" class="nav-link">Features</a></li>
+          <li><a href="architecture.html" class="nav-link active">Architecture</a></li>
+          <li><a href="components.html" class="nav-link">Components</a></li>
+        </ul>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Reference</div>
+        <ul class="nav-list">
+          <li><a href="api-reference.html" class="nav-link">API Reference</a></li>
+          <li><a href="configuration.html" class="nav-link">Configuration</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <main id="main-content" class="main-content">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="index.html">Docs</a></li>
+          <li aria-current="page">Architecture</li>
+        </ol>
+      </nav>
+
+      <article class="content">
+        <h1>Architecture</h1>
+        <p>This project follows a feature-based architecture pattern that promotes scalability, maintainability, and clear separation of concerns.</p>
+
+        <h2>Project Structure</h2>
+        <p>The codebase is organized into logical directories:</p>
+
+        <div class="file-tree">
+          <ul>
+            <li><span class="folder">src/</span>
+              <ul>
+                <li><span class="folder">app/</span> <span class="comment"># Next.js App Router</span>
+                  <ul>
+                    <li><span class="folder">(auth)/</span> <span class="comment"># Auth route group</span></li>
+                    <li><span class="folder">(dashboard)/</span> <span class="comment"># Dashboard route group</span></li>
+                    <li><span class="folder">api/</span> <span class="comment"># API routes</span></li>
+                  </ul>
+                </li>
+                <li><span class="folder">components/</span> <span class="comment"># Shared components</span>
+                  <ul>
+                    <li><span class="folder">ui/</span> <span class="comment"># Shadcn UI components</span></li>
+                    <li><span class="folder">layout/</span> <span class="comment"># Layout components</span></li>
+                  </ul>
+                </li>
+                <li><span class="folder">features/</span> <span class="comment"># Feature modules</span>
+                  <ul>
+                    <li><span class="folder">[feature]/</span>
+                      <ul>
+                        <li><span class="folder">components/</span></li>
+                        <li><span class="folder">actions/</span></li>
+                        <li><span class="folder">schemas/</span></li>
+                        <li><span class="folder">utils/</span></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li><span class="folder">lib/</span> <span class="comment"># Core utilities</span></li>
+                <li><span class="folder">hooks/</span> <span class="comment"># Custom React hooks</span></li>
+                <li><span class="folder">stores/</span> <span class="comment"># Zustand stores</span></li>
+                <li><span class="folder">types/</span> <span class="comment"># TypeScript types</span></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+        <h2>App Router Structure</h2>
+        <p>The <code>app/</code> directory uses Next.js 16 App Router conventions:</p>
+
+        <h3>Route Groups</h3>
+        <p>Route groups (folders in parentheses) organize routes without affecting the URL:</p>
+        <ul>
+          <li><code>(auth)</code> - Authentication pages (sign-in, sign-up)</li>
+          <li><code>(dashboard)</code> - Protected dashboard pages</li>
+        </ul>
+
+        <pre><code class="language-plaintext">app/
+├── (auth)/
+│   ├── (signin)/
+│   │   └── sign-in/[[...sign-in]]/page.tsx
+│   └── (signup)/
+│       └── sign-up/[[...sign-up]]/page.tsx
+├── (dashboard)/
+│   ├── dashboard/
+│   │   ├── page.tsx
+│   │   ├── layout.tsx
+│   │   ├── product/
+│   │   ├── kanban/
+│   │   └── ...
+│   └── layout.tsx
+└── layout.tsx</code></pre>
+
+        <h3>Parallel Routes</h3>
+        <p>The dashboard overview uses parallel routes for independent loading:</p>
+        <pre><code class="language-plaintext">dashboard/
+├── @analytics/
+│   ├── page.tsx
+│   └── loading.tsx
+├── @recent/
+│   ├── page.tsx
+│   └── loading.tsx
+├── layout.tsx
+└── page.tsx</code></pre>
+
+        <h2>Feature-Based Organization</h2>
+        <p>Each feature is self-contained with its own components, actions, and utilities:</p>
+
+        <pre><code class="language-plaintext">features/
+├── products/
+│   ├── components/
+│   │   ├── product-table.tsx
+│   │   ├── product-form.tsx
+│   │   └── product-card.tsx
+│   ├── actions/
+│   │   ├── create-product.ts
+│   │   ├── update-product.ts
+│   │   └── delete-product.ts
+│   ├── schemas/
+│   │   └── product-schema.ts
+│   └── utils/
+│       └── format-product.ts
+├── kanban/
+│   ├── components/
+│   ├── stores/
+│   └── types/
+└── ...</code></pre>
+
+        <h3>Benefits</h3>
+        <ul>
+          <li><strong>Encapsulation</strong> - All feature code in one place</li>
+          <li><strong>Scalability</strong> - Easy to add new features</li>
+          <li><strong>Maintainability</strong> - Clear boundaries between features</li>
+          <li><strong>Team Collaboration</strong> - Teams can work on features independently</li>
+        </ul>
+
+        <h2>Component Architecture</h2>
+
+        <h3>UI Components</h3>
+        <p>Shadcn UI components live in <code>components/ui/</code>:</p>
+        <pre><code class="language-tsx">// components/ui/button.tsx
+import { cva, type VariantProps } from 'class-variance-authority';
+
+const buttonVariants = cva(
+  'inline-flex items-center justify-center rounded-md text-sm font-medium',
+  {
+    variants: {
+      variant: {
+        default: 'bg-primary text-primary-foreground hover:bg-primary/90',
+        destructive: 'bg-destructive text-destructive-foreground',
+        outline: 'border border-input bg-background hover:bg-accent',
+      },
+      size: {
+        default: 'h-10 px-4 py-2',
+        sm: 'h-9 rounded-md px-3',
+        lg: 'h-11 rounded-md px-8',
+      },
+    },
+  }
+);
+
+export function Button({ variant, size, ...props }) {
+  return &lt;button className={buttonVariants({ variant, size })} {...props} /&gt;;
+}</code></pre>
+
+        <h3>Layout Components</h3>
+        <p>Shared layout components in <code>components/layout/</code>:</p>
+        <ul>
+          <li><code>sidebar.tsx</code> - Main navigation sidebar</li>
+          <li><code>header.tsx</code> - Top header with user menu</li>
+          <li><code>breadcrumb.tsx</code> - Page breadcrumb navigation</li>
+          <li><code>page-container.tsx</code> - Content wrapper</li>
+        </ul>
+
+        <h2>State Management</h2>
+
+        <h3>Server State</h3>
+        <p>Server state is managed through:</p>
+        <ul>
+          <li><strong>Server Components</strong> - Data fetching at the component level</li>
+          <li><strong>Server Actions</strong> - Mutations with form actions</li>
+          <li><strong>Nuqs</strong> - URL search params for filters/pagination</li>
+        </ul>
+
+        <h3>Client State</h3>
+        <p>Client state uses Zustand for global state:</p>
+        <pre><code class="language-tsx">// stores/kanban-store.ts
+import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
+
+interface KanbanStore {
+  columns: Column[];
+  tasks: Task[];
+  moveTask: (taskId: string, columnId: string) => void;
+}
+
+export const useKanbanStore = create&lt;KanbanStore&gt;()(
+  persist(
+    (set) => ({
+      columns: [],
+      tasks: [],
+      moveTask: (taskId, columnId) =>
+        set((state) => ({
+          tasks: state.tasks.map((task) =>
+            task.id === taskId ? { ...task, columnId } : task
+          ),
+        })),
+    }),
+    { name: 'kanban-storage' }
+  )
+);</code></pre>
+
+        <h2>Data Flow</h2>
+        <p>The typical data flow in the application:</p>
+
+        <ol>
+          <li><strong>Route Handler</strong> - Next.js routes the request</li>
+          <li><strong>Layout</strong> - Wraps page with shared UI</li>
+          <li><strong>Page Component</strong> - Server component fetches data</li>
+          <li><strong>Feature Components</strong> - Render with fetched data</li>
+          <li><strong>Server Actions</strong> - Handle mutations</li>
+          <li><strong>Revalidation</strong> - Update UI after mutations</li>
+        </ol>
+
+        <pre><code class="language-tsx">// Example data flow
+// 1. Page fetches data
+async function ProductsPage() {
+  const products = await getProducts();
+  return &lt;ProductTable data={products} /&gt;;
+}
+
+// 2. Server action handles mutation
+async function createProduct(formData: FormData) {
+  'use server';
+  await db.products.create({ ... });
+  revalidatePath('/dashboard/products');
+}</code></pre>
+
+        <h2>Authentication Flow</h2>
+        <p>Clerk handles authentication with middleware protection:</p>
+
+        <pre><code class="language-tsx">// middleware.ts
+import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
+
+const isProtectedRoute = createRouteMatcher(['/dashboard(.*)']);
+
+export default clerkMiddleware(async (auth, req) => {
+  if (isProtectedRoute(req)) {
+    await auth.protect();
+  }
+});
+
+export const config = {
+  matcher: ['/((?!.*\\..*|_next).*)', '/', '/(api|trpc)(.*)'],
+};</code></pre>
+
+        <nav class="page-nav" aria-label="Page navigation">
+          <a href="features.html" class="prev-link">
+            <span class="nav-label">Previous</span>
+            <span class="nav-title">← Features</span>
+          </a>
+          <a href="components.html" class="next-link">
+            <span class="nav-label">Next</span>
+            <span class="nav-title">Components →</span>
+          </a>
+        </nav>
+      </article>
+    </main>
+  </div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Documentation for Next.js Shadcn Dashboard Starter - A production-ready admin dashboard template">
+  <title>Getting Started - Dashboard Docs</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to content</a>
+
+  <header class="header">
+    <div class="header-content">
+      <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="hamburger"></span>
+      </button>
+      <a href="index.html" class="logo">
+        <span>📚</span>
+        <span>Dashboard Docs</span>
+      </a>
+      <button class="theme-toggle" aria-label="Toggle theme">
+        <svg class="theme-icon theme-icon-moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+        <svg class="theme-icon theme-icon-sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <div class="layout">
+    <nav class="sidebar" aria-label="Main navigation">
+      <div class="nav-section">
+        <div class="nav-section-title">Getting Started</div>
+        <ul class="nav-list">
+          <li><a href="index.html" class="nav-link active">Introduction</a></li>
+          <li><a href="installation.html" class="nav-link">Installation</a></li>
+        </ul>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Guide</div>
+        <ul class="nav-list">
+          <li><a href="features.html" class="nav-link">Features</a></li>
+          <li><a href="architecture.html" class="nav-link">Architecture</a></li>
+          <li><a href="components.html" class="nav-link">Components</a></li>
+        </ul>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Reference</div>
+        <ul class="nav-list">
+          <li><a href="api-reference.html" class="nav-link">API Reference</a></li>
+          <li><a href="configuration.html" class="nav-link">Configuration</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <main id="main-content" class="main-content">
+      <article class="content">
+        <div class="hero">
+          <h1>Next.js Shadcn Dashboard</h1>
+          <p class="subtitle">A production-ready admin dashboard template built with Next.js 16, Shadcn UI, and Tailwind CSS v4</p>
+          <div class="hero-buttons">
+            <a href="installation.html" class="btn btn-primary">Get Started</a>
+            <a href="https://dub.sh/shadcn-dashboard" class="btn btn-secondary" target="_blank" rel="noopener">Live Demo →</a>
+          </div>
+        </div>
+
+        <h2>Overview</h2>
+        <p>This admin dashboard starter template provides everything you need to build modern SaaS applications, internal tools, and admin panels. It comes with pre-built components, authentication, and a scalable architecture.</p>
+
+        <div class="feature-grid">
+          <div class="feature-card">
+            <div class="feature-icon">🧱</div>
+            <h3>Dashboard Layout</h3>
+            <p>Pre-built sidebar, header, and content area with responsive design</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">📊</div>
+            <h3>Analytics</h3>
+            <p>Cards and Recharts graphs for beautiful data visualization</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">📋</div>
+            <h3>Data Tables</h3>
+            <p>Server-side search, filter & pagination with Tanstack Table</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🔐</div>
+            <h3>Authentication</h3>
+            <p>Secure auth & user management via Clerk</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🏢</div>
+            <h3>Multi-tenant</h3>
+            <p>Workspaces with Clerk Organizations support</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🎨</div>
+            <h3>Shadcn UI</h3>
+            <p>Beautiful, accessible components with Tailwind CSS</p>
+          </div>
+        </div>
+
+        <h2>Tech Stack</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Category</th>
+              <th>Technology</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Framework</td>
+              <td>Next.js 16 (App Router)</td>
+            </tr>
+            <tr>
+              <td>Language</td>
+              <td>TypeScript</td>
+            </tr>
+            <tr>
+              <td>Styling</td>
+              <td>Tailwind CSS v4</td>
+            </tr>
+            <tr>
+              <td>Components</td>
+              <td>Shadcn UI</td>
+            </tr>
+            <tr>
+              <td>Auth</td>
+              <td>Clerk</td>
+            </tr>
+            <tr>
+              <td>State</td>
+              <td>Zustand</td>
+            </tr>
+            <tr>
+              <td>Forms</td>
+              <td>React Hook Form + Zod</td>
+            </tr>
+            <tr>
+              <td>Tables</td>
+              <td>Tanstack Table</td>
+            </tr>
+            <tr>
+              <td>Charts</td>
+              <td>Recharts</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2>Quick Start</h2>
+        <p>Get up and running in minutes:</p>
+
+        <pre><code class="language-bash"># Clone the repository
+git clone https://github.com/Kiranism/next-shadcn-dashboard-starter.git
+cd next-shadcn-dashboard-starter
+
+# Install dependencies
+bun install
+
+# Set up environment variables
+cp env.example.txt .env.local
+
+# Start development server
+bun run dev</code></pre>
+
+        <p>Open <a href="http://localhost:3000">http://localhost:3000</a> to view the dashboard.</p>
+
+        <div class="callout callout-info">
+          <svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="16" x2="12" y2="12"></line>
+            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+          </svg>
+          <div class="callout-content">
+            <div class="callout-title">Note</div>
+            <p>Make sure you have Node.js 18+ and Bun installed before getting started.</p>
+          </div>
+        </div>
+
+        <h2>Use Cases</h2>
+        <p>This template is perfect for building:</p>
+        <ul>
+          <li>SaaS admin dashboards</li>
+          <li>Internal tools & operations panels</li>
+          <li>Analytics dashboards</li>
+          <li>Client project admin panels</li>
+          <li>Boilerplate for new Next.js admin UI projects</li>
+        </ul>
+
+        <nav class="page-nav" aria-label="Page navigation">
+          <span></span>
+          <a href="installation.html" class="next-link">
+            <span class="nav-label">Next</span>
+            <span class="nav-title">Installation →</span>
+          </a>
+        </nav>
+      </article>
+    </main>
+  </div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

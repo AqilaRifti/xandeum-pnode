@@ -2,10 +2,6 @@
   "name": "next-shadcn-dashboard-starter",
   "version": "1.0.0",
   "private": true,
-  "author": {
-    "name": "Kiran",
-    "url": "https://github.com/Kiranism"
-  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",

@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="API Reference for Next.js Shadcn Dashboard Starter">
+  <title>API Reference - Dashboard Docs</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to content</a>
+
+  <header class="header">
+    <div class="header-content">
+      <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="hamburger"></span>
+      </button>
+      <a href="index.html" class="logo">
+        <span>📚</span>
+        <span>Dashboard Docs</span>
+      </a>
+      <button class="theme-toggle" aria-label="Toggle theme">
+        <svg class="theme-icon theme-icon-moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+        <svg class="theme-icon theme-icon-sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <div class="layout">
+    <nav class="sidebar" aria-label="Main navigation">
+      <div class="nav-section">
+        <div class="nav-section-title">Getting Started</div>
+        <ul class="nav-list">
+          <li><a href="index.html" class="nav-link">Introduction</a></li>
+          <li><a href="installation.html" class="nav-link">Installation</a></li>
+        </ul>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Guide</div>
+        <ul class="nav-list">
+          <li><a href="features.html" class="nav-link">Features</a></li>
+          <li><a href="architecture.html" class="nav-link">Architecture</a></li>
+          <li><a href="components.html" class="nav-link">Components</a></li>
+        </ul>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Reference</div>
+        <ul class="nav-list">
+          <li><a href="api-reference.html" class="nav-link active">API Reference</a></li>
+          <li><a href="configuration.html" class="nav-link">Configuration</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <main id="main-content" class="main-content">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="index.html">Docs</a></li>
+          <li aria-current="page">API Reference</li>
+        </ol>
+      </nav>
+
+      <article class="content">
+        <h1>API Reference</h1>
+        <p>This section covers the server actions, API routes, and utility functions available in the dashboard.</p>
+
+        <h2>Server Actions</h2>
+        <p>Server actions handle data mutations with built-in validation and error handling.</p>
+
+        <h3>Product Actions</h3>
+
+        <h4>createProduct</h4>
+        <p>Creates a new product in the database.</p>
+
+        <pre><code class="language-tsx">// features/products/actions/create-product.ts
+'use server';
+
+import { z } from 'zod';
+import { revalidatePath } from 'next/cache';
+
+const productSchema = z.object({
+  name: z.string().min(1, 'Name is required'),
+  description: z.string().optional(),
+  price: z.number().positive('Price must be positive'),
+  category: z.string().min(1, 'Category is required'),
+  status: z.enum(['active', 'draft', 'archived']),
+});
+
+export async function createProduct(formData: FormData) {
+  const validatedFields = productSchema.safeParse({
+    name: formData.get('name'),
+    description: formData.get('description'),
+    price: Number(formData.get('price')),
+    category: formData.get('category'),
+    status: formData.get('status'),
+  });
+
+  if (!validatedFields.success) {
+    return { error: validatedFields.error.flatten().fieldErrors };
+  }
+
+  // Create product in database
+  await db.products.create({ data: validatedFields.data });
+  
+  revalidatePath('/dashboard/products');
+  return { success: true };
+}</code></pre>
+
+        <h4>updateProduct</h4>
+        <p>Updates an existing product.</p>
+
+        <pre><code class="language-tsx">export async function updateProduct(id: string, formData: FormData) {
+  const validatedFields = productSchema.safeParse({
+    name: formData.get('name'),
+    description: formData.get('description'),
+    price: Number(formData.get('price')),
+    category: formData.get('category'),
+    status: formData.get('status'),
+  });
+
+  if (!validatedFields.success) {
+    return { error: validatedFields.error.flatten().fieldErrors };
+  }
+
+  await db.products.update({
+    where: { id },
+    data: validatedFields.data,
+  });
+  
+  revalidatePath('/dashboard/products');
+  return { success: true };
+}</code></pre>
+
+        <h4>deleteProduct</h4>
+        <p>Deletes a product by ID.</p>
+
+        <pre><code class="language-tsx">export async function deleteProduct(id: string) {
+  await db.products.delete({ where: { id } });
+  revalidatePath('/dashboard/products');
+  return { success: true };
+}</code></pre>
+
+        <h2>Data Fetching</h2>
+        <p>Data fetching functions for server components.</p>
+
+        <h3>getProducts</h3>
+        <p>Fetches products with pagination and filtering.</p>
+
+        <pre><code class="language-tsx">// features/products/actions/get-products.ts
+interface GetProductsParams {
+  page?: number;
+  limit?: number;
+  search?: string;
+  category?: string;
+  status?: string;
+  sortBy?: string;
+  sortOrder?: 'asc' | 'desc';
+}
+
+export async function getProducts(params: GetProductsParams = {}) {
+  const {
+    page = 1,
+    limit = 10,
+    search,
+    category,
+    status,
+    sortBy = 'createdAt',
+    sortOrder = 'desc',
+  } = params;
+
+  const where = {
+    ...(search && {
+      OR: [
+        { name: { contains: search, mode: 'insensitive' } },
+        { description: { contains: search, mode: 'insensitive' } },
+      ],
+    }),
+    ...(category && { category }),
+    ...(status && { status }),
+  };
+
+  const [items, total] = await Promise.all([
+    db.products.findMany({
+      where,
+      skip: (page - 1) * limit,
+      take: limit,
+      orderBy: { [sortBy]: sortOrder },
+    }),
+    db.products.count({ where }),
+  ]);
+
+  return {
+    items,
+    total,
+    page,
+    limit,
+    pageCount: Math.ceil(total / limit),
+  };
+}</code></pre>
+
+        <h2>Custom Hooks</h2>
+
+        <h3>useDebounce</h3>
+        <p>Debounces a value for search inputs.</p>
+
+        <pre><code class="language-tsx">// hooks/use-debounce.ts
+import { useState, useEffect } from 'react';
+
+export function useDebounce&lt;T&gt;(value: T, delay: number = 500): T {
+  const [debouncedValue, setDebouncedValue] = useState&lt;T&gt;(value);
+
+  useEffect(() =&gt; {
+    const timer = setTimeout(() =&gt; {
+      setDebouncedValue(value);
+    }, delay);
+
+    return () =&gt; clearTimeout(timer);
+  }, [value, delay]);
+
+  return debouncedValue;
+}
+
+// Usage
+function SearchInput() {
+  const [search, setSearch] = useState('');
+  const debouncedSearch = useDebounce(search, 300);
+  
+  useEffect(() =&gt; {
+    // Fetch results with debouncedSearch
+  }, [debouncedSearch]);
+}</code></pre>
+
+        <h3>useMediaQuery</h3>
+        <p>Responds to media query changes.</p>
+
+        <pre><code class="language-tsx">// hooks/use-media-query.ts
+import { useState, useEffect } from 'react';
+
+export function useMediaQuery(query: string): boolean {
+  const [matches, setMatches] = useState(false);
+
+  useEffect(() =&gt; {
+    const media = window.matchMedia(query);
+    setMatches(media.matches);
+
+    const listener = (e: MediaQueryListEvent) =&gt; setMatches(e.matches);
+    media.addEventListener('change', listener);
+    
+    return () =&gt; media.removeEventListener('change', listener);
+  }, [query]);
+
+  return matches;
+}
+
+// Usage
+function Component() {
+  const isMobile = useMediaQuery('(max-width: 768px)');
+  return isMobile ? &lt;MobileView /&gt; : &lt;DesktopView /&gt;;
+}</code></pre>
+
+        <h2>Utility Functions</h2>
+
+        <h3>cn (Class Names)</h3>
+        <p>Merges Tailwind CSS classes with conflict resolution.</p>
+
+        <pre><code class="language-tsx">// lib/utils.ts
+import { clsx, type ClassValue } from 'clsx';
+import { twMerge } from 'tailwind-merge';
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}
+
+// Usage
+&lt;div className={cn(
+  'base-class',
+  isActive && 'active-class',
+  className
+)} /&gt;</code></pre>
+
+        <h3>formatDate</h3>
+        <p>Formats dates consistently across the app.</p>
+
+        <pre><code class="language-tsx">// lib/utils.ts
+import { format, formatDistanceToNow } from 'date-fns';
+
+export function formatDate(date: Date | string, pattern = 'PPP') {
+  return format(new Date(date), pattern);
+}
+
+export function formatRelativeDate(date: Date | string) {
+  return formatDistanceToNow(new Date(date), { addSuffix: true });
+}
+
+// Usage
+formatDate('2024-01-15'); // "January 15, 2024"
+formatRelativeDate('2024-01-15'); // "2 months ago"</code></pre>
+
+        <h3>formatCurrency</h3>
+        <p>Formats numbers as currency.</p>
+
+        <pre><code class="language-tsx">// lib/utils.ts
+export function formatCurrency(
+  amount: number,
+  currency = 'USD',
+  locale = 'en-US'
+) {
+  return new Intl.NumberFormat(locale, {
+    style: 'currency',
+    currency,
+  }).format(amount);
+}
+
+// Usage
+formatCurrency(1234.56); // "$1,234.56"
+formatCurrency(1234.56, 'EUR', 'de-DE'); // "1.234,56 €"</code></pre>
+
+        <h2>Type Definitions</h2>
+
+        <pre><code class="language-tsx">// types/index.ts
+
+// Product types
+export interface Product {
+  id: string;
+  name: string;
+  description?: string;
+  price: number;
+  category: string;
+  status: 'active' | 'draft' | 'archived';
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+// Pagination types
+export interface PaginatedResponse&lt;T&gt; {
+  items: T[];
+  total: number;
+  page: number;
+  limit: number;
+  pageCount: number;
+}
+
+// API response types
+export interface ApiResponse&lt;T&gt; {
+  data?: T;
+  error?: string;
+  success: boolean;
+}
+
+// Form state types
+export interface FormState {
+  errors?: Record&lt;string, string[]&gt;;
+  message?: string;
+  success?: boolean;
+}</code></pre>
+
+        <nav class="page-nav" aria-label="Page navigation">
+          <a href="components.html" class="prev-link">
+            <span class="nav-label">Previous</span>
+            <span class="nav-title">← Components</span>
+          </a>
+          <a href="configuration.html" class="next-link">
+            <span class="nav-label">Next</span>
+            <span class="nav-title">Configuration →</span>
+          </a>
+        </nav>
+      </article>
+    </main>
+  </div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

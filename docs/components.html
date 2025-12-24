@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Components documentation for Next.js Shadcn Dashboard Starter">
+  <title>Components - Dashboard Docs</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to content</a>
+
+  <header class="header">
+    <div class="header-content">
+      <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="hamburger"></span>
+      </button>
+      <a href="index.html" class="logo">
+        <span>📚</span>
+        <span>Dashboard Docs</span>
+      </a>
+      <button class="theme-toggle" aria-label="Toggle theme">
+        <svg class="theme-icon theme-icon-moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+        <svg class="theme-icon theme-icon-sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <div class="layout">
+    <nav class="sidebar" aria-label="Main navigation">
+      <div class="nav-section">
+        <div class="nav-section-title">Getting Started</div>
+        <ul class="nav-list">
+          <li><a href="index.html" class="nav-link">Introduction</a></li>
+          <li><a href="installation.html" class="nav-link">Installation</a></li>
+        </ul>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Guide</div>
+        <ul class="nav-list">
+          <li><a href="features.html" class="nav-link">Features</a></li>
+          <li><a href="architecture.html" class="nav-link">Architecture</a></li>
+          <li><a href="components.html" class="nav-link active">Components</a></li>
+        </ul>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Reference</div>
+        <ul class="nav-list">
+          <li><a href="api-reference.html" class="nav-link">API Reference</a></li>
+          <li><a href="configuration.html" class="nav-link">Configuration</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <main id="main-content" class="main-content">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="index.html">Docs</a></li>
+          <li aria-current="page">Components</li>
+        </ol>
+      </nav>
+
+      <article class="content">
+        <h1>Components</h1>
+        <p>This dashboard uses Shadcn UI components built on Radix UI primitives. Here's how to use the key components.</p>
+
+        <h2>Button</h2>
+        <p>Buttons trigger actions and come in multiple variants:</p>
+
+        <pre><code class="language-tsx">import { Button } from '@/components/ui/button';
+
+// Default button
+&lt;Button&gt;Click me&lt;/Button&gt;
+
+// Variants
+&lt;Button variant="default"&gt;Default&lt;/Button&gt;
+&lt;Button variant="destructive"&gt;Destructive&lt;/Button&gt;
+&lt;Button variant="outline"&gt;Outline&lt;/Button&gt;
+&lt;Button variant="secondary"&gt;Secondary&lt;/Button&gt;
+&lt;Button variant="ghost"&gt;Ghost&lt;/Button&gt;
+&lt;Button variant="link"&gt;Link&lt;/Button&gt;
+
+// Sizes
+&lt;Button size="default"&gt;Default&lt;/Button&gt;
+&lt;Button size="sm"&gt;Small&lt;/Button&gt;
+&lt;Button size="lg"&gt;Large&lt;/Button&gt;
+&lt;Button size="icon"&gt;&lt;Icon /&gt;&lt;/Button&gt;
+
+// With loading state
+&lt;Button disabled&gt;
+  &lt;Loader2 className="mr-2 h-4 w-4 animate-spin" /&gt;
+  Loading...
+&lt;/Button&gt;</code></pre>
+
+        <h2>Card</h2>
+        <p>Cards group related content and actions:</p>
+
+        <pre><code class="language-tsx">import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+
+&lt;Card&gt;
+  &lt;CardHeader&gt;
+    &lt;CardTitle&gt;Card Title&lt;/CardTitle&gt;
+    &lt;CardDescription&gt;Card description goes here&lt;/CardDescription&gt;
+  &lt;/CardHeader&gt;
+  &lt;CardContent&gt;
+    &lt;p&gt;Card content&lt;/p&gt;
+  &lt;/CardContent&gt;
+  &lt;CardFooter&gt;
+    &lt;Button&gt;Action&lt;/Button&gt;
+  &lt;/CardFooter&gt;
+&lt;/Card&gt;</code></pre>
+
+        <h2>Data Table</h2>
+        <p>Tables display data with sorting, filtering, and pagination:</p>
+
+        <pre><code class="language-tsx">import { DataTable } from '@/components/ui/data-table';
+import { columns } from './columns';
+
+// Define columns
+const columns = [
+  {
+    accessorKey: 'name',
+    header: 'Name',
+  },
+  {
+    accessorKey: 'email',
+    header: 'Email',
+  },
+  {
+    accessorKey: 'status',
+    header: 'Status',
+    cell: ({ row }) =&gt; (
+      &lt;Badge variant={row.original.status}&gt;
+        {row.original.status}
+      &lt;/Badge&gt;
+    ),
+  },
+];
+
+// Use the table
+&lt;DataTable columns={columns} data={users} /&gt;</code></pre>
+
+        <h3>Server-Side Pagination</h3>
+        <p>For large datasets, use server-side pagination with Nuqs:</p>
+
+        <pre><code class="language-tsx">import { useQueryState } from 'nuqs';
+
+function ProductTable() {
+  const [page, setPage] = useQueryState('page', { defaultValue: '1' });
+  const [search, setSearch] = useQueryState('search', { defaultValue: '' });
+  
+  // Fetch data based on query params
+  const { data } = useProducts({ page, search });
+  
+  return (
+    &lt;DataTable
+      columns={columns}
+      data={data.items}
+      pageCount={data.pageCount}
+      onPageChange={setPage}
+    /&gt;
+  );
+}</code></pre>
+
+        <h2>Form</h2>
+        <p>Forms with React Hook Form and Zod validation:</p>
+
+        <pre><code class="language-tsx">import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+
+const formSchema = z.object({
+  username: z.string().min(2).max(50),
+  email: z.string().email(),
+});
+
+function ProfileForm() {
+  const form = useForm({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      username: '',
+      email: '',
+    },
+  });
+
+  function onSubmit(values) {
+    console.log(values);
+  }
+
+  return (
+    &lt;Form {...form}&gt;
+      &lt;form onSubmit={form.handleSubmit(onSubmit)}&gt;
+        &lt;FormField
+          control={form.control}
+          name="username"
+          render={({ field }) =&gt; (
+            &lt;FormItem&gt;
+              &lt;FormLabel&gt;Username&lt;/FormLabel&gt;
+              &lt;FormControl&gt;
+                &lt;Input placeholder="johndoe" {...field} /&gt;
+              &lt;/FormControl&gt;
+              &lt;FormDescription&gt;
+                Your public display name.
+              &lt;/FormDescription&gt;
+              &lt;FormMessage /&gt;
+            &lt;/FormItem&gt;
+          )}
+        /&gt;
+        &lt;Button type="submit"&gt;Submit&lt;/Button&gt;
+      &lt;/form&gt;
+    &lt;/Form&gt;
+  );
+}</code></pre>
+
+        <h2>Dialog</h2>
+        <p>Modal dialogs for confirmations and forms:</p>
+
+        <pre><code class="language-tsx">import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
+
+&lt;Dialog&gt;
+  &lt;DialogTrigger asChild&gt;
+    &lt;Button&gt;Open Dialog&lt;/Button&gt;
+  &lt;/DialogTrigger&gt;
+  &lt;DialogContent&gt;
+    &lt;DialogHeader&gt;
+      &lt;DialogTitle&gt;Are you sure?&lt;/DialogTitle&gt;
+      &lt;DialogDescription&gt;
+        This action cannot be undone.
+      &lt;/DialogDescription&gt;
+    &lt;/DialogHeader&gt;
+    &lt;DialogFooter&gt;
+      &lt;Button variant="outline"&gt;Cancel&lt;/Button&gt;
+      &lt;Button&gt;Continue&lt;/Button&gt;
+    &lt;/DialogFooter&gt;
+  &lt;/DialogContent&gt;
+&lt;/Dialog&gt;</code></pre>
+
+        <h2>Dropdown Menu</h2>
+        <p>Contextual menus for actions:</p>
+
+        <pre><code class="language-tsx">import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+
+&lt;DropdownMenu&gt;
+  &lt;DropdownMenuTrigger asChild&gt;
+    &lt;Button variant="ghost"&gt;
+      &lt;MoreHorizontal className="h-4 w-4" /&gt;
+    &lt;/Button&gt;
+  &lt;/DropdownMenuTrigger&gt;
+  &lt;DropdownMenuContent align="end"&gt;
+    &lt;DropdownMenuLabel&gt;Actions&lt;/DropdownMenuLabel&gt;
+    &lt;DropdownMenuSeparator /&gt;
+    &lt;DropdownMenuItem&gt;Edit&lt;/DropdownMenuItem&gt;
+    &lt;DropdownMenuItem&gt;Duplicate&lt;/DropdownMenuItem&gt;
+    &lt;DropdownMenuItem className="text-destructive"&gt;
+      Delete
+    &lt;/DropdownMenuItem&gt;
+  &lt;/DropdownMenuContent&gt;
+&lt;/DropdownMenu&gt;</code></pre>
+
+        <h2>Toast Notifications</h2>
+        <p>Show feedback messages with Sonner:</p>
+
+        <pre><code class="language-tsx">import { toast } from 'sonner';
+
+// Success toast
+toast.success('Changes saved successfully');
+
+// Error toast
+toast.error('Something went wrong');
+
+// With description
+toast('Event created', {
+  description: 'Your event has been scheduled.',
+});
+
+// With action
+toast('File uploaded', {
+  action: {
+    label: 'View',
+    onClick: () =&gt; console.log('View clicked'),
+  },
+});
+
+// Promise toast
+toast.promise(saveData(), {
+  loading: 'Saving...',
+  success: 'Data saved!',
+  error: 'Could not save.',
+});</code></pre>
+
+        <h2>Sidebar Navigation</h2>
+        <p>The dashboard sidebar with collapsible sections:</p>
+
+        <pre><code class="language-tsx">import { Sidebar, SidebarNav, SidebarNavItem } from '@/components/layout/sidebar';
+
+const navItems = [
+  {
+    title: 'Dashboard',
+    href: '/dashboard',
+    icon: LayoutDashboard,
+  },
+  {
+    title: 'Products',
+    href: '/dashboard/products',
+    icon: Package,
+  },
+  {
+    title: 'Settings',
+    icon: Settings,
+    children: [
+      { title: 'Profile', href: '/dashboard/settings/profile' },
+      { title: 'Team', href: '/dashboard/settings/team' },
+    ],
+  },
+];
+
+&lt;Sidebar&gt;
+  &lt;SidebarNav items={navItems} /&gt;
+&lt;/Sidebar&gt;</code></pre>
+
+        <h2>Adding New Components</h2>
+        <p>Add new Shadcn UI components using the CLI:</p>
+
+        <pre><code class="language-bash"># Add a single component
+npx shadcn@latest add accordion
+
+# Add multiple components
+npx shadcn@latest add accordion alert avatar
+
+# View all available components
+npx shadcn@latest add</code></pre>
+
+        <div class="callout callout-info">
+          <svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="16" x2="12" y2="12"></line>
+            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+          </svg>
+          <div class="callout-content">
+            <div class="callout-title">Tip</div>
+            <p>Components are added to <code>src/components/ui/</code> and can be customized to match your design system.</p>
+          </div>
+        </div>
+
+        <nav class="page-nav" aria-label="Page navigation">
+          <a href="architecture.html" class="prev-link">
+            <span class="nav-label">Previous</span>
+            <span class="nav-title">← Architecture</span>
+          </a>
+          <a href="api-reference.html" class="next-link">
+            <span class="nav-label">Next</span>
+            <span class="nav-title">API Reference →</span>
+          </a>
+        </nav>
+      </article>
+    </main>
+  </div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Features overview for Next.js Shadcn Dashboard Starter">
+  <title>Features - Dashboard Docs</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to content</a>
+
+  <header class="header">
+    <div class="header-content">
+      <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="hamburger"></span>
+      </button>
+      <a href="index.html" class="logo">
+        <span>📚</span>
+        <span>Dashboard Docs</span>
+      </a>
+      <button class="theme-toggle" aria-label="Toggle theme">
+        <svg class="theme-icon theme-icon-moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+        <svg class="theme-icon theme-icon-sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <div class="layout">
+    <nav class="sidebar" aria-label="Main navigation">
+      <div class="nav-section">
+        <div class="nav-section-title">Getting Started</div>
+        <ul class="nav-list">
+          <li><a href="index.html" class="nav-link">Introduction</a></li>
+          <li><a href="installation.html" class="nav-link">Installation</a></li>
+        </ul>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Guide</div>
+        <ul class="nav-list">
+          <li><a href="features.html" class="nav-link active">Features</a></li>
+          <li><a href="architecture.html" class="nav-link">Architecture</a></li>
+          <li><a href="components.html" class="nav-link">Components</a></li>
+        </ul>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Reference</div>
+        <ul class="nav-list">
+          <li><a href="api-reference.html" class="nav-link">API Reference</a></li>
+          <li><a href="configuration.html" class="nav-link">Configuration</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <main id="main-content" class="main-content">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="index.html">Docs</a></li>
+          <li aria-current="page">Features</li>
+        </ol>
+      </nav>
+
+      <article class="content">
+        <h1>Features</h1>
+        <p>Explore the comprehensive features included in the Next.js Shadcn Dashboard Starter.</p>
+
+        <h2>Dashboard Layout</h2>
+        <p>The dashboard comes with a pre-built, responsive layout that includes:</p>
+        <ul>
+          <li><strong>Collapsible Sidebar</strong> - Navigation with icons and nested menu support</li>
+          <li><strong>Header</strong> - User menu, notifications, and search</li>
+          <li><strong>Content Area</strong> - Flexible main content with proper spacing</li>
+          <li><strong>Mobile Responsive</strong> - Optimized for all screen sizes</li>
+        </ul>
+
+        <h2>Analytics Overview</h2>
+        <p>The dashboard overview page features:</p>
+        <ul>
+          <li><strong>Stat Cards</strong> - Display key metrics with trend indicators</li>
+          <li><strong>Charts</strong> - Line, bar, and area charts using Recharts</li>
+          <li><strong>Parallel Routes</strong> - Independent loading states for each section</li>
+          <li><strong>Real-time Updates</strong> - Ready for live data integration</li>
+        </ul>
+
+        <pre><code class="language-tsx">// Example: Analytics Card Component
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+
+export function AnalyticsCard({ title, value, change }) {
+  return (
+    &lt;Card&gt;
+      &lt;CardHeader&gt;
+        &lt;CardTitle&gt;{title}&lt;/CardTitle&gt;
+      &lt;/CardHeader&gt;
+      &lt;CardContent&gt;
+        &lt;div className="text-2xl font-bold"&gt;{value}&lt;/div&gt;
+        &lt;p className="text-muted-foreground"&gt;{change}&lt;/p&gt;
+      &lt;/CardContent&gt;
+    &lt;/Card&gt;
+  );
+}</code></pre>
+
+        <h2>Data Tables</h2>
+        <p>Powerful data tables built with Tanstack Table featuring:</p>
+        <ul>
+          <li><strong>Server-side Pagination</strong> - Efficient handling of large datasets</li>
+          <li><strong>Search & Filter</strong> - Type-safe search params with Nuqs</li>
+          <li><strong>Column Sorting</strong> - Click headers to sort data</li>
+          <li><strong>Row Selection</strong> - Select single or multiple rows</li>
+          <li><strong>Column Visibility</strong> - Toggle columns on/off</li>
+        </ul>
+
+        <h2>Authentication</h2>
+        <p>Secure authentication powered by Clerk:</p>
+        <ul>
+          <li><strong>Sign In/Sign Up</strong> - Beautiful, customizable auth pages</li>
+          <li><strong>Social Logins</strong> - Google, GitHub, and more</li>
+          <li><strong>Passwordless</strong> - Email magic links and OTP</li>
+          <li><strong>Enterprise SSO</strong> - SAML and OIDC support</li>
+          <li><strong>User Management</strong> - Profile and security settings</li>
+        </ul>
+
+        <pre><code class="language-tsx">// Protecting routes with Clerk
+import { auth } from '@clerk/nextjs/server';
+import { redirect } from 'next/navigation';
+
+export default async function DashboardPage() {
+  const { userId } = await auth();
+  
+  if (!userId) {
+    redirect('/sign-in');
+  }
+  
+  return &lt;Dashboard /&gt;;
+}</code></pre>
+
+        <h2>Multi-tenant Workspaces</h2>
+        <p>Built-in support for organizations and teams:</p>
+        <ul>
+          <li><strong>Create Organizations</strong> - Users can create workspaces</li>
+          <li><strong>Switch Workspaces</strong> - Easy context switching</li>
+          <li><strong>Team Management</strong> - Invite and manage members</li>
+          <li><strong>Role-based Access</strong> - Admin, member, and custom roles</li>
+        </ul>
+
+        <h2>Billing & Subscriptions</h2>
+        <p>Monetization features with Clerk Billing:</p>
+        <ul>
+          <li><strong>Pricing Table</strong> - Display subscription plans</li>
+          <li><strong>Plan Management</strong> - Upgrade, downgrade, cancel</li>
+          <li><strong>Feature Gating</strong> - Restrict features by plan</li>
+          <li><strong>Usage Tracking</strong> - Monitor resource consumption</li>
+        </ul>
+
+        <pre><code class="language-tsx">// Feature gating example
+import { Protect } from '@clerk/nextjs';
+
+export function ProFeature() {
+  return (
+    &lt;Protect
+      condition={(has) =&gt; has({ plan: 'pro' })}
+      fallback={&lt;UpgradePrompt /&gt;}
+    &gt;
+      &lt;ProContent /&gt;
+    &lt;/Protect&gt;
+  );
+}</code></pre>
+
+        <h2>RBAC Navigation</h2>
+        <p>Role-based access control for navigation:</p>
+        <ul>
+          <li><strong>Permission-based</strong> - Show/hide menu items based on permissions</li>
+          <li><strong>Role-based</strong> - Different navigation for different roles</li>
+          <li><strong>Organization-aware</strong> - Context-specific navigation</li>
+          <li><strong>Client-side Filtering</strong> - Fast, responsive UI</li>
+        </ul>
+
+        <h2>Kanban Board</h2>
+        <p>Drag and drop task management:</p>
+        <ul>
+          <li><strong>Drag & Drop</strong> - Smooth interactions with dnd-kit</li>
+          <li><strong>Columns</strong> - Customizable workflow stages</li>
+          <li><strong>Persistence</strong> - State saved with Zustand</li>
+          <li><strong>Keyboard Support</strong> - Accessible drag operations</li>
+        </ul>
+
+        <h2>Forms</h2>
+        <p>Type-safe forms with validation:</p>
+        <ul>
+          <li><strong>React Hook Form</strong> - Performant form handling</li>
+          <li><strong>Zod Validation</strong> - Schema-based validation</li>
+          <li><strong>Shadcn Form Components</strong> - Beautiful form elements</li>
+          <li><strong>Error Handling</strong> - Clear validation messages</li>
+        </ul>
+
+        <pre><code class="language-tsx">// Form with Zod validation
+import { z } from 'zod';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+
+const schema = z.object({
+  name: z.string().min(2, 'Name must be at least 2 characters'),
+  email: z.string().email('Invalid email address'),
+});
+
+export function ContactForm() {
+  const form = useForm({
+    resolver: zodResolver(schema),
+  });
+  
+  return (
+    &lt;Form {...form}&gt;
+      {/* Form fields */}
+    &lt;/Form&gt;
+  );
+}</code></pre>
+
+        <h2>Command Palette</h2>
+        <p>Quick navigation with kbar:</p>
+        <ul>
+          <li><strong>Keyboard Shortcut</strong> - Press <code>⌘+K</code> to open</li>
+          <li><strong>Search</strong> - Find pages, actions, and commands</li>
+          <li><strong>Nested Actions</strong> - Hierarchical command structure</li>
+          <li><strong>Customizable</strong> - Add your own commands</li>
+        </ul>
+
+        <h2>Error Tracking</h2>
+        <p>Production-ready error monitoring with Sentry:</p>
+        <ul>
+          <li><strong>Automatic Capture</strong> - Errors logged automatically</li>
+          <li><strong>Session Replay</strong> - See what users experienced</li>
+          <li><strong>Performance Monitoring</strong> - Track page load times</li>
+          <li><strong>Release Tracking</strong> - Associate errors with deployments</li>
+        </ul>
+
+        <nav class="page-nav" aria-label="Page navigation">
+          <a href="installation.html" class="prev-link">
+            <span class="nav-label">Previous</span>
+            <span class="nav-title">← Installation</span>
+          </a>
+          <a href="architecture.html" class="next-link">
+            <span class="nav-label">Next</span>
+            <span class="nav-title">Architecture →</span>
+          </a>
+        </nav>
+      </article>
+    </main>
+  </div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
